@@ -54,13 +54,16 @@ const handleUpdateValue = (key, item) => {
           @update:value="handleUpdateValue"
         />
       </n-layout-sider>
-      <n-layout-content content-style="padding: 2rem;">
+      <n-layout-content
+        content-style="padding: 2rem;"
+        :native-scrollbar="false"
+      >
         <router-view />
       </n-layout-content>
     </n-layout>
-    <n-layout-footer class="p-2 flex justify-between items-center">
+    <!-- <n-layout-footer class="p-2 flex justify-between items-center">
       footer
-    </n-layout-footer>
+    </n-layout-footer> -->
   </n-layout>
 </template>
 
