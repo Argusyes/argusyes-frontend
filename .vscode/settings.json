@@ -1,0 +1,21 @@
+{
+  "prettier.enable": false,
+  "editor.formatOnSave": false,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "i18n-ally.localesPaths": [
+    "src/locale",
+    "src/locale/lang"
+  ],
+  "css.lint.unknownAtRules": "ignore",
+  "scss.lint.unknownAtRules": "ignore",
+  "cSpell.words": [
+    "argusyes",
+    "datetimerange",
+    "minwidth",
+    "sider"
+  ],
+  "commentTranslate.targetLanguage": "en",
+  "commentTranslate.hover.enabled": true
+}

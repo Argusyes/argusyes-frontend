@@ -1,0 +1,4 @@
+.n-progress, .n-progress-content, .n-progress--multiple-circle, .n-progress--default {
+  width: 100px !important;
+  height: 100px !important;
+}
