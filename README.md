@@ -1,4 +1,4 @@
-# CIS-MP-Frontend
+# Argusyes-Frontend
 
 ## Setup
 
@@ -10,15 +10,3 @@ $ pnpm run prepare
 ```
 
 then use `pnpm run dev` to run this project.
-
-## Project Structure
-
-- api
-- assets
-- components
-  - common
-  - pages
-- locale
-- router
-- store
-- utils
