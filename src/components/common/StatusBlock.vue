@@ -10,36 +10,24 @@ const percentage = ref(10)
     </template>
     <div class="flex items-center justify-between">
       <CircleBar
-        :width="100"
-        :height="100"
-        :percentage=".88999"
+        :width="60"
+        :height="60"
+        :percentage=".799"
+        title="Mem"
+        :divide="[.10, .80]"
       />
-      <!-- <n-el v-for="num in 1" :key="num">
-        <n-progress
-          type="multiple-circle"
-          :show-indicator="false"
-          :stroke-width="6"
-          :circle-gap="0.5"
-          :percentage="[
-            percentage,
-            (percentage + 10) % 100,
-            (percentage + 20) % 100,
-            (percentage + 30) % 100,
-          ]"
-          :color="[
-            'var(--info-color)',
-            'var(--success-color)',
-            'var(--warning-color)',
-            'var(--error-color)',
-          ]"
-          :rail-style="[
-            { stroke: 'var(--info-color)', opacity: 0.3 },
-            { stroke: 'var(--success-color)', opacity: 0.3 },
-            { stroke: 'var(--warning-color)', opacity: 0.3 },
-            { stroke: 'var(--error-color)', opacity: 0.3 },
-          ]"
-        />
-      </n-el> -->
+      <CircleBar
+        :width="60"
+        :height="60"
+        :percentage=".11"
+        title="CPU"
+      />
+      <CircleBar
+        :width="60"
+        :height="60"
+        :percentage=".50"
+        title="Swap"
+      />
     </div>
   </n-card>
 </template>
