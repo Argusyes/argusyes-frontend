@@ -1,6 +1,17 @@
 <script setup>
 const props = defineProps({
   showModal: Boolean,
+  type: {
+    type: String,
+    default: 'add',
+    validator(value) {
+      return ['add', 'edit'].includes(value)
+    },
+  },
+  data: {
+    type: Object,
+    default: null,
+  },
 })
 const emit = defineEmits([
   'modalClose',
@@ -13,7 +24,7 @@ const model = ref({
   host: undefined,
   port: 22,
   user: 'root',
-  password: undefined,
+  passwd: undefined,
 })
 
 // 表单的校验规则
@@ -101,11 +112,11 @@ watch(
           />
         </n-form-item>
         <n-form-item
-          path="password"
+          path="passwd"
           label="Password"
         >
           <n-input
-            v-model:value="model.password"
+            v-model:value="model.passwd"
             type="password"
             show-password-on="mousedown"
             round

@@ -4,13 +4,17 @@ const props = defineProps({
     type: Object,
   },
 })
+const emit = defineEmits([
+  'editHost',
+  'deleteHost',
+])
 
 // events
 function handleEditHost() {
-  //
+  emit('editHost', props.data)
 }
 function handleDeleteHost() {
-  //
+  emit('deleteHost', props.data)
 }
 </script>
 

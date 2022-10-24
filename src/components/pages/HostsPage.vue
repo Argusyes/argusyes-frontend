@@ -6,6 +6,8 @@ const model = ref({
 const rules = {}
 
 const showAddAHostModal = ref(false)
+const modalType = ref('add')
+const modalData = ref(null)
 
 const hostsList = [
   {
@@ -13,37 +15,47 @@ const hostsList = [
     host: '10.112.230.222',
     port: 10022,
     user: 'root',
-    pass: 'this is the password',
+    passwd: 'this is the password',
   },
   {
     name: 'Lab-WSR',
     host: '10.112.159.83',
     port: 22222,
     user: 'wangshangrong',
-    pass: 'this is the password',
+    passwd: 'this is the password',
   },
   {
     name: 'cc',
     host: '192.168.0.106',
     port: 22,
     user: 'cc',
-    pass: 'this is the password',
+    passwd: 'this is the password',
   },
   {
     name: 'eshop',
     host: '82.156.189.178',
     port: 22,
     user: 'root',
-    pass: 'this is the password',
+    passwd: 'this is the password',
   },
 ]
 
 // events
 function handleAddAHostButtonClick() {
   showAddAHostModal.value = true
+  modalType.value = 'add'
+  modalData.value = null
 }
 function handleAddAHostModalClose() {
   showAddAHostModal.value = false
+}
+function handleEditHost(hostInfo) {
+  showAddAHostModal.value = true
+  modalType.value = 'edit'
+  modalData.value = hostInfo
+}
+function handleDeleteHost(hostInfo) {
+  //
 }
 </script>
 
@@ -83,11 +95,17 @@ function handleAddAHostModalClose() {
     cols="1 800:2 1200:3 1600:4"
   >
     <n-gi v-for="item in hostsList" :key="item.name">
-      <HostBlock :data="item" />
+      <HostBlock
+        :data="item"
+        @delete-host="handleDeleteHost"
+        @edit-host="handleEditHost"
+      />
     </n-gi>
   </n-grid>
-  <AddAHostModal
+  <HostModal
     :show-modal="showAddAHostModal"
+    :type="modalType"
+    :data="modalData"
     @modal-close="handleAddAHostModalClose"
   />
 </template>
