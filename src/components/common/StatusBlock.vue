@@ -1,9 +1,33 @@
 <script setup>
+const props = defineProps({
+  data: {
+    type: Object,
+    default: null,
+  },
+})
+
+const router = useRouter()
 const percentage = ref(10)
+
+// events
+function handleBlockClick() {
+  router.push({
+    name: 'statusDetails',
+    params: {
+      name: 'lab',
+    },
+  })
+}
 </script>
 
 <template>
-  <n-card title="Lab" size="huge" :bordered="false" class="rounded-xl cursor-pointer">
+  <n-card
+    title="Lab"
+    size="huge"
+    :bordered="false"
+    class="rounded-xl cursor-pointer"
+    @click="handleBlockClick"
+  >
     <template #header-extra>
       <i-uil-temperature class="text-red-500" />
       30℃

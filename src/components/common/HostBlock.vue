@@ -19,7 +19,13 @@ function handleDeleteHost() {
 </script>
 
 <template>
-  <n-card :title="props.data.name" size="huge" :bordered="false" class="rounded-xl cursor-pointer">
+  <n-card
+    :title="props.data.name"
+    size="huge"
+    :bordered="false"
+    class="rounded-xl cursor-pointer"
+    @click="handleEditHost"
+  >
     <template #header-extra>
       <div class="flex gap-1">
         <n-button

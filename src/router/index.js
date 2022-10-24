@@ -5,6 +5,7 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 import Site from '@/components/pages/Site.vue' // 框架页
 import LoginPage from '@/components/pages/LoginPage.vue' // 登陆页面
 import StatusPage from '@/components/pages/StatusPage.vue' // 登陆页面
+import StatusDetailsPage from '@/components/pages/StatusDetailsPage.vue' // 登陆页面
 import HostsPage from '@/components/pages/HostsPage.vue' // 登陆页面
 
 const routes = [
@@ -17,6 +18,11 @@ const routes = [
         path: 'status',
         name: 'status',
         component: StatusPage,
+      },
+      {
+        path: 'status/details/:name',
+        name: 'statusDetails',
+        component: StatusDetailsPage,
       },
       {
         path: 'hosts',
