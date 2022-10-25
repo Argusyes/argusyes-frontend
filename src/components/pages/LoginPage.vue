@@ -3,10 +3,18 @@ const router = useRouter()
 const store = useStore()
 const { t } = useI18n()
 const message = useMessage()
-const formRef = ref(null)
-const model = ref({
+
+const tabsValue = ref('login')
+const tabsInstRef = ref(null)
+const loginFormRef = ref(null)
+const registerFormRef = ref(null)
+const loginModel = ref({
   username: store.loginInfo.username,
   password: store.loginInfo.password,
+})
+const registerModel = ref({
+  username: undefined,
+  password: undefined,
 })
 // rules
 const rules = {
@@ -25,15 +33,15 @@ const rules = {
 }
 
 // handle events
-const handleLoginClick = (e) => {
-  message.info(`${model.value.username} - ${model.value.password} - ${store.rememberLoginInfo}`)
+const handleLoginClick = () => {
+  message.info(`${loginModel.value.username} - ${loginModel.value.password} - ${store.rememberLoginInfo}`)
   // 验证表单
-  formRef.value?.validate((errors) => {
+  loginFormRef.value?.validate((errors) => {
     if (!errors) {
       try {
         const requestBody = {
-          username: model.value.username,
-          passwd: model.value.password,
+          username: loginModel.value.username,
+          passwd: loginModel.value.password,
         }
         api.loginPage.login(requestBody)
           .then((resp) => {
@@ -53,13 +61,40 @@ const handleLoginClick = (e) => {
   })
   // 根据是否记住密码决定 localStorage 中的 loginInfo
   if (store.rememberLoginInfo) {
-    store.loginInfo.username = model.value.username
-    store.loginInfo.password = model.value.password
+    store.loginInfo.username = loginModel.value.username
+    store.loginInfo.password = loginModel.value.password
   }
   else {
     store.loginInfo.username = ''
     store.loginInfo.password = ''
   }
+}
+const handleRegisterClick = () => {
+  message.info(`${registerModel.value.username} - ${registerModel.value.password} - ${store.rememberLoginInfo}`)
+  // 验证表单
+  registerFormRef.value?.validate((errors) => {
+    if (!errors) {
+      try {
+        const requestBody = {
+          username: registerModel.value.username,
+          passwd: registerModel.value.password,
+        }
+        api.loginPage.register(requestBody)
+          .then((resp) => {
+            // eslint-disable-next-line no-console
+            console.log(resp)
+            if (resp.code !== 200) { message.error(resp.msg) }
+            else {
+              tabsValue.value = 'login'
+              nextTick(() => tabsInstRef.value?.syncBarPosition())
+            }
+          })
+      }
+      catch (e) {
+        message.error(e.toString())
+      }
+    }
+  })
 }
 </script>
 
@@ -77,32 +112,61 @@ const handleLoginClick = (e) => {
     </n-layout-header>
     <n-layout has-sider class="flex-1">
       <n-layout-content content-style="display: flex; justify-content: center; align-items: center;">
-        <n-card :title="$t('login.login')" hoverable class="w-max-[40rem] rounded-4xl">
-          <n-form ref="formRef" :model="model" :rules="rules" label-placement="left" label-width="auto">
-            <n-form-item path="username" :label="$t('login.account.label')">
-              <n-input v-model:value="model.username" :placeholder="$t('login.account.placeholder')" round />
-            </n-form-item>
-            <n-form-item path="password" :label="$t('login.password.label')">
-              <n-input
-                v-model:value="model.password"
-                type="password"
-                show-password-on="mousedown"
-                :placeholder="$t('login.password.placeholder')"
-                round
-              />
-            </n-form-item>
-          </n-form>
-          <div class="flex justify-center gap-2">
-            <span>
-              {{ $t('login.remember') }}
-            </span>
-            <n-switch v-model:value="store.rememberLoginInfo" />
-          </div>
-          <template #footer>
-            <n-button strong secondary round class="w-full" @click="handleLoginClick">
-              {{ $t('login.login') }}
-            </n-button>
-          </template>
+        <n-card
+          hoverable
+          class="w-max-[40rem] rounded-4xl"
+        >
+          <n-tabs
+            ref="tabsInstRef"
+            v-model:value="tabsValue"
+          >
+            <!-- login -->
+            <n-tab-pane name="login" tab="登录">
+              <n-form ref="loginFormRef" :model="loginModel" :rules="rules" label-placement="left" label-width="auto">
+                <n-form-item path="username" :label="$t('login.account.label')">
+                  <n-input v-model:value="loginModel.username" :placeholder="$t('login.account.placeholder')" round />
+                </n-form-item>
+                <n-form-item path="password" :label="$t('login.password.label')">
+                  <n-input
+                    v-model:value="loginModel.password"
+                    type="password"
+                    show-password-on="mousedown"
+                    :placeholder="$t('login.password.placeholder')"
+                    round
+                  />
+                </n-form-item>
+              </n-form>
+              <div class="flex justify-center gap-2">
+                <span>
+                  {{ $t('login.remember') }}
+                </span>
+                <n-switch v-model:value="store.rememberLoginInfo" />
+              </div>
+              <n-button strong secondary round class="mt-6 w-full" @click="handleLoginClick">
+                {{ $t('login.login') }}
+              </n-button>
+            </n-tab-pane>
+            <!-- register -->
+            <n-tab-pane name="register" tab="注册">
+              <n-form ref="registerFormRef" :model="registerModel" :rules="rules" label-placement="left" label-width="auto">
+                <n-form-item path="username" :label="$t('login.account.label')">
+                  <n-input v-model:value="registerModel.username" :placeholder="$t('login.account.placeholder')" round />
+                </n-form-item>
+                <n-form-item path="password" :label="$t('login.password.label')">
+                  <n-input
+                    v-model:value="registerModel.password"
+                    type="password"
+                    show-password-on="mousedown"
+                    :placeholder="$t('login.password.placeholder')"
+                    round
+                  />
+                </n-form-item>
+              </n-form>
+              <n-button strong secondary round class="mt-6 w-full" @click="handleRegisterClick">
+                {{ $t('login.register') }}
+              </n-button>
+            </n-tab-pane>
+          </n-tabs>
         </n-card>
       </n-layout-content>
     </n-layout>

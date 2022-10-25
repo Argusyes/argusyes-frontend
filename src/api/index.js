@@ -60,6 +60,9 @@ export const api = {
     login(body) {
       return request.post('/user/login', body)
     },
+    register(body) {
+      return request.post('/user/register', body)
+    },
   },
   registerPage: {
     register(body) {
