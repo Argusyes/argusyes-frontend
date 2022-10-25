@@ -87,6 +87,8 @@ const handleRegisterClick = () => {
             else {
               tabsValue.value = 'login'
               nextTick(() => tabsInstRef.value?.syncBarPosition())
+              loginModel.value.username = registerModel.value.username
+              loginModel.value.password = undefined
             }
           })
       }
