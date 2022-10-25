@@ -23,6 +23,7 @@ const rules = {
     },
   ],
 }
+
 // handle events
 const handleLoginClick = (e) => {
   message.info(`${model.value.username} - ${model.value.password} - ${store.rememberLoginInfo}`)
@@ -30,24 +31,18 @@ const handleLoginClick = (e) => {
   formRef.value?.validate((errors) => {
     if (!errors) {
       try {
-        api.loginPage.login(model.value)
+        const requestBody = {
+          username: model.value.username,
+          passwd: model.value.password,
+        }
+        api.loginPage.login(requestBody)
           .then((resp) => {
             // eslint-disable-next-line no-console
             console.log(resp)
             if (resp.code !== 200) { message.error(resp.msg) }
             else {
-              message.success(resp.msg)
-              const { expire, isSubAccount, role, token, username, xToken } = resp
-              // eslint-disable-next-line dot-notation
-              const authList = resp['function']?.split(',')
-              store.accountInfo = {
-                username,
-                isSubAccount,
-                role,
-                authList,
-              }
-              store.tokenInfo = { xToken, expire, token }
-              router.push('/server-management')
+              const jwt = resp.data
+              router.push('/status')
             }
           })
       }
