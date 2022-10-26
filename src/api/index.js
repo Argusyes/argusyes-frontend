@@ -83,7 +83,18 @@ export const api = {
     //
   },
   hostsPage: {
-    //
+    addHosts(body) {
+      return request.post('/user/addSSH', body)
+    },
+    deleteHosts(body) {
+      return request.post('/user/deleteSSH', body)
+    },
+    updateHosts(body) {
+      return request.post('/user/updateSSH', body)
+    },
+    searchHosts(params) {
+      return request.get('/user/selectSSH', params)
+    },
   },
 
   // GET
