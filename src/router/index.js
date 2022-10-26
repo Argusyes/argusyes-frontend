@@ -1,5 +1,5 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-// import { useStore } from '@/store/index.js'
+import { useStore } from '@/store/index.js'
 
 // pages
 import Site from '@/components/pages/Site.vue' // 框架页
@@ -43,11 +43,12 @@ const router = createRouter({
 })
 
 // 守卫
-// router.beforeEach(async (to) => {
-//   const store = useStore()
-//   // check if jwt is in localStorage
-//   if (!['login', 'register'].includes(to.name) && store.jwt === '')
-//     return { name: 'login' }
-// })
+router.beforeEach(async (to) => {
+  const store = useStore()
+  // check if jwt is in localStorage
+  // if (['register'].includes(to.name) && store.jwt === '')
+  if (to.name !== 'login' && store.jwt === '')
+    return { name: 'login' }
+})
 
 export default router

@@ -23,10 +23,7 @@ const options = [
 ]
 
 const handleLogout = () => {
-  api.site.logout(store.accountInfo.username).then(() => {
-    store.tokenInfo = { token: '', expire: '', xToken: '' }
-  })
-  router.push('/login')
+  store.jwt = ''
 }
 const handleSelect = (key) => {
   switch (key) {

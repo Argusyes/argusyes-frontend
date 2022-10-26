@@ -11,16 +11,8 @@ export const useStore = defineStore('main', () => {
     password: '',
   })
   const rememberLoginInfo = useStorage('remember-login-info', true)
-  const tokenInfo = useStorage('token-info', {
-    xToken: '',
-    token: '',
-    expire: '',
-  })
   const accountInfo = ref({
     username: '',
-    role: '',
-    isSubAccount: 0,
-    authList: [],
   })
   return {
     jwt,
@@ -28,6 +20,5 @@ export const useStore = defineStore('main', () => {
     loginInfo,
     rememberLoginInfo,
     accountInfo,
-    tokenInfo,
   }
 })

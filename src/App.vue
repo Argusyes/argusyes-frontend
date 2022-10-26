@@ -2,6 +2,8 @@
 import { darkTheme, dateZhCN, zhCN } from 'naive-ui'
 
 const store = useStore()
+const route = useRoute()
+const router = useRouter()
 
 const locale = computed(() => {
   return store.lang === 'zh' ? zhCN : null
@@ -19,6 +21,12 @@ const reload = () => {
   })
 }
 provide('reload', reload)
+
+// logout
+watchEffect(() => {
+  if (!store.jwt && route.path !== '/login')
+    router.push('/login')
+})
 </script>
 
 <template>

@@ -50,6 +50,7 @@ const handleLoginClick = () => {
             if (resp.code !== 200) { message.error(resp.msg) }
             else {
               const jwt = resp.data
+              store.jwt = jwt
               router.push('/status')
             }
           })

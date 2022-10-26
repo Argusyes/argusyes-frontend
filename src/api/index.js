@@ -25,31 +25,47 @@ const requestRaw = requestCreator()
 
 export const request = {
   get(url, params) {
+    const jwt = localStorage.getItem('jwt')
     return requestRaw({
       url,
       params,
+      headers: {
+        Authorization: jwt,
+      },
     })
   },
   post(url, body) {
+    const jwt = localStorage.getItem('jwt')
     return requestRaw({
       url,
       method: 'POST',
       data: body,
+      headers: {
+        Authorization: jwt,
+      },
     })
   },
   delete(url, body) {
+    const jwt = localStorage.getItem('jwt')
     return requestRaw({
       url,
       method: 'DELETE',
       data: body,
+      headers: {
+        Authorization: jwt,
+      },
     })
   },
   put(url, params, body) {
+    const jwt = localStorage.getItem('jwt')
     return requestRaw({
       url,
       method: 'PUT',
       params,
       data: body,
+      headers: {
+        Authorization: jwt,
+      },
     })
   },
 }
@@ -92,7 +108,7 @@ export const api = {
     updateHosts(body) {
       return request.post('/user/updateSSH', body)
     },
-    searchHosts(params) {
+    getHostList(params) {
       return request.get('/user/selectSSH', params)
     },
   },
