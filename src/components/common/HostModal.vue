@@ -20,21 +20,83 @@ const emit = defineEmits([
 
 const formRef = ref(null)
 const model = ref({
-  name: undefined,
-  host: undefined,
+  name: '',
+  host: '',
   port: 22,
   user: 'root',
-  passwd: undefined,
+  passwd: '',
 })
 
 // 表单的校验规则
 const rules = {}
 
 // requests
+function addHosts() {
+  try {
+    const requestBody = {
+      data: [
+        model.value,
+      ],
+    }
+    api.hostsPage.addHosts(requestBody)
+      .then((resp) => {
+        console.log(resp)
+        if (resp.code !== 200) { message.error(resp.msg) }
+        else {
+          //
+          console.log('success', resp)
+          emit('refreshList')
+          emit('modalClose')
+        }
+      })
+  }
+  catch (e) {
+    message.error(e.toString())
+  }
+}
+function updateHosts() {
+  try {
+    const requestBody = {
+      data: [
+        {
+          oldName: props.data.name,
+          oldHost: props.data.host,
+          oldPort: props.data.port,
+          oldUser: props.data.user,
+          oldPasswd: props.data.passwd,
+          newName: model.value.name,
+          newHost: model.value.host,
+          newPort: model.value.port,
+          newUser: model.value.user,
+          newPasswd: model.value.passwd,
+        },
+      ],
+    }
+    api.hostsPage.updateHosts(requestBody)
+      .then((resp) => {
+        console.log(resp)
+        if (resp.code !== 200) { message.error(resp.msg) }
+        else {
+          //
+          console.log('success', resp)
+          emit('refreshList')
+          emit('modalClose')
+        }
+      })
+  }
+  catch (e) {
+    message.error(e.toString())
+  }
+}
 
 // events
 function handleSaveButtonClick() {
-  //
+  if (props.type === 'add')
+    addHosts()
+  else if (props.type === 'edit')
+    updateHosts()
+  else
+    throw new Error('Host Modal: Unknown props.type')
 }
 
 watch(

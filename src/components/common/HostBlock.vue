@@ -24,7 +24,6 @@ function handleDeleteHost() {
     size="huge"
     :bordered="false"
     class="rounded-xl cursor-pointer"
-    @click="handleEditHost"
   >
     <template #header-extra>
       <div class="flex gap-1">

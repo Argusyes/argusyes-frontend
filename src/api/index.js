@@ -30,7 +30,7 @@ export const request = {
       url,
       params,
       headers: {
-        Authorization: jwt,
+        'A-Token': jwt,
       },
     })
   },
@@ -41,7 +41,7 @@ export const request = {
       method: 'POST',
       data: body,
       headers: {
-        Authorization: jwt,
+        'A-Token': jwt,
       },
     })
   },
@@ -52,19 +52,18 @@ export const request = {
       method: 'DELETE',
       data: body,
       headers: {
-        Authorization: jwt,
+        'A-Token': jwt,
       },
     })
   },
-  put(url, params, body) {
+  put(url, body) {
     const jwt = localStorage.getItem('jwt')
     return requestRaw({
       url,
       method: 'PUT',
-      params,
       data: body,
       headers: {
-        Authorization: jwt,
+        'A-Token': jwt,
       },
     })
   },
@@ -103,13 +102,16 @@ export const api = {
       return request.post('/user/addSSH', body)
     },
     deleteHosts(body) {
-      return request.post('/user/deleteSSH', body)
+      return request.delete('/user/deleteSSH', body)
     },
     updateHosts(body) {
-      return request.post('/user/updateSSH', body)
+      return request.put('/user/updateSSH', body)
     },
-    getHostList(params) {
-      return request.get('/user/selectSSH', params)
+    // getHostList(params) {
+    //   return request.get('/user/selectSSH', params)
+    // },
+    getHostList(body) {
+      return request.post('/user/selectSSH', body)
     },
   },
 
