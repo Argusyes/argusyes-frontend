@@ -13,6 +13,7 @@ const routes = [
     path: '/',
     name: 'index',
     component: Site,
+    redirect: '/status',
     children: [
       {
         path: 'status',
