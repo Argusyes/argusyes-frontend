@@ -30,9 +30,6 @@ watchEffect(() => {
 </script>
 
 <template>
-  <!-- <n-message-provider>
-    <router-view />
-  </n-message-provider> -->
   <n-config-provider :theme="darkTheme" :locale="locale" :date-locale="dateLocale">
     <n-loading-bar-provider>
       <n-message-provider>

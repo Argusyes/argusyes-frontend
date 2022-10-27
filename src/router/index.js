@@ -7,6 +7,8 @@ import LoginPage from '@/components/pages/LoginPage.vue' // 登陆页面
 import StatusPage from '@/components/pages/StatusPage.vue' // 登陆页面
 import StatusDetailsPage from '@/components/pages/StatusDetailsPage.vue' // 登陆页面
 import HostsPage from '@/components/pages/HostsPage.vue' // 登陆页面
+// result page
+import NotFound from '@/components/pages/NotFound.vue'
 
 const routes = [
   {
@@ -31,6 +33,11 @@ const routes = [
         component: HostsPage,
       },
     ],
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    name: 'NotFound',
+    component: NotFound,
   },
   {
     path: '/login',
