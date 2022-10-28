@@ -107,11 +107,8 @@ export const api = {
     updateHosts(body) {
       return request.put('/user/updateSSH', body)
     },
-    // getHostList(params) {
-    //   return request.get('/user/selectSSH', params)
-    // },
-    getHostList(body) {
-      return request.post('/user/selectSSH', body)
+    getHostList(params) {
+      return request.get('/user/selectSSH', params)
     },
   },
 

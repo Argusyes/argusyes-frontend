@@ -1,4 +1,6 @@
 <script setup>
+import { useDebounce } from '@vueuse/core'
+
 const message = useMessage()
 const dialog = useDialog()
 
@@ -48,9 +50,8 @@ const hostsList = ref([
 function getHostList() {
   try {
     showSpin.value = true
-    // api.hostsPage.getHostList()
     api.hostsPage.getHostList({
-      name: '',
+      name: model.value.search,
     })
       .then((resp) => {
         if (resp.code !== 200) { message.error(resp.msg) }
@@ -99,6 +100,13 @@ function deleteHosts(hostInfo) {
 }
 
 // events
+const handleSearch = useDebounceFn(() => {
+  // check form
+  searchFormRef.value?.validate((errors) => {
+    if (!errors)
+      getHostList()
+  })
+}, 300)
 function handleAddAHostButtonClick() {
   showAddAHostModal.value = true
   modalType.value = 'add'
@@ -126,6 +134,11 @@ function handleDeleteHost(hostInfo) {
     },
   })
 }
+
+watch(
+  () => model.value.search,
+  handleSearch,
+)
 
 onMounted(() => {
   getHostList()

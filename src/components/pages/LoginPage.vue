@@ -124,7 +124,7 @@ const handleRegisterClick = () => {
             v-model:value="tabsValue"
           >
             <!-- login -->
-            <n-tab-pane name="login" tab="登录">
+            <n-tab-pane name="login" tab="Login">
               <n-form ref="loginFormRef" :model="loginModel" :rules="rules" label-placement="left" label-width="auto">
                 <n-form-item path="username" :label="$t('login.account.label')">
                   <n-input v-model:value="loginModel.username" :placeholder="$t('login.account.placeholder')" round />
@@ -150,7 +150,7 @@ const handleRegisterClick = () => {
               </n-button>
             </n-tab-pane>
             <!-- register -->
-            <n-tab-pane name="register" tab="注册">
+            <n-tab-pane name="register" tab="Register">
               <n-form ref="registerFormRef" :model="registerModel" :rules="rules" label-placement="left" label-width="auto">
                 <n-form-item path="username" :label="$t('login.account.label')">
                   <n-input v-model:value="registerModel.username" :placeholder="$t('login.account.placeholder')" round />

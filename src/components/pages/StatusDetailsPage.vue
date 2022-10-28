@@ -17,15 +17,15 @@ const router = useRouter()
         <i-material-symbols-arrow-back />
       </n-button>
     </div>
-    <div class="content-box flex gap-2">
+    <div class="content-box flex">
       <!-- left -->
-      <div class="flex-1 overflow-auto">
+      <div class="flex-1 overflow-auto p-4 border">
         <div v-for="i in 100" :key="i">
           {{ i }}
         </div>
       </div>
       <!-- right -->
-      <div class="flex-1 overflow-auto">
+      <div class="flex-1 overflow-auto p-4 border">
         <div v-for="i in 100" :key="i">
           {{ i }}
         </div>
