@@ -37,6 +37,7 @@ export default defineConfig({
       dirs: [
         './src/store',
         './src/api',
+        './src/ws',
         './src/utils',
         './src/constants',
       ],

@@ -22,7 +22,7 @@ function handleBlockClick() {
 
 <template>
   <n-card
-    title="Lab"
+    :title="props.data.name"
     size="huge"
     :bordered="false"
     class="rounded-xl cursor-pointer"

@@ -1,5 +1,4 @@
 <script setup>
-const route = useRoute()
 const router = useRouter()
 </script>
 
@@ -19,16 +18,16 @@ const router = useRouter()
     </div>
     <div class="content-box flex">
       <!-- left -->
-      <div class="flex-1 overflow-auto p-4 border">
-        <div v-for="i in 100" :key="i">
-          {{ i }}
-        </div>
+      <div class="flex-1 overflow-auto p-2 flex flex-col gap-4">
+        <CPUBox />
+        <MemoryBox />
+        <GraphicsBox />
+        <NetworkBox />
+        <HardDiskBox />
       </div>
       <!-- right -->
-      <div class="flex-1 overflow-auto p-4 border">
-        <div v-for="i in 100" :key="i">
-          {{ i }}
-        </div>
+      <div class="flex-1 overflow-auto p-2 flex flex-col gap-4">
+        <ProcessBox />
       </div>
     </div>
   </n-layout>
