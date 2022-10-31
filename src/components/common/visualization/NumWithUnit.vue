@@ -17,7 +17,10 @@ const props = defineProps({
 
 <template>
   <div class="flex items-end gap-1">
-    <span class="strong-text" :class="props.fontSize">
+    <span v-if="props.num !== 0" class="strong-text" :class="props.fontSize">
+      {{ props.num }}
+    </span>
+    <span v-else-if="props.num === 0" class="secondary-text" :class="props.fontSize">
       {{ props.num }}
     </span>
     <span class="secondary-text">
