@@ -35,6 +35,31 @@
           color="yellow"
         />
       </div>
+      <n-divider />
+      <CPUCoresUsage />
+      <n-divider />
+      <div class="flex justify-between items-center">
+        <DataWithTitle
+          :num="8"
+          title="CORES"
+        />
+        <DataWithTitle
+          :num="72"
+          unit="%"
+          title="IDLE"
+        />
+        <DataWithTitle
+          :num="52"
+          unit="D"
+          title="UPTIME"
+        />
+        <!--  TODO: load 1/5/15m -->
+        <DataWithTitle
+          :num="0"
+          unit="%"
+          title="LOAD"
+        />
+      </div>
     </div>
   </DetailsBox>
 </template>

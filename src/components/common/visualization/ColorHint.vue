@@ -1,9 +1,5 @@
 <script setup>
 const props = defineProps({
-  title: {
-    type: String,
-    default: '',
-  },
   color: {
     type: String,
     default: 'none',
@@ -15,16 +11,11 @@ const props = defineProps({
 </script>
 
 <template>
-  <div class="flex items-center gap-2">
-    <div
-      v-if="props.color !== 'none'"
-      class="rounded-lg h-4 w-2"
-      :class="props.color"
-    />
-    <span v-if="props.title !== ''" class="secondary-text">
-      {{ props.title }}
-    </span>
-  </div>
+  <div
+    v-if="props.color !== 'none'"
+    class="rounded-lg h-3"
+    :class="props.color"
+  />
 </template>
 
 <style scoped>
