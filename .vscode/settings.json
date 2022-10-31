@@ -16,6 +16,7 @@
     "GEFORCE",
     "IOWAIT",
     "minwidth",
+    "RETRANS",
     "sider"
   ],
   "commentTranslate.targetLanguage": "en",
