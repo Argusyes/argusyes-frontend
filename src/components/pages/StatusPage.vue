@@ -37,23 +37,23 @@ function callbackAfterGetHosts(cb) {
 }
 
 onMounted(() => {
-  callbackAfterGetHosts((hostList) => {
-    console.log(hostList)
-    data.value = hostList
-    const requestParam = {
-      id: '1',
-      method: 'ssh.startMonitor',
-      params: hostList.map((e) => {
-        return {
-          port: e.port,
-          host: e.host,
-          user: e.user,
-          passwd: e.passwd,
-        }
-      }),
-    }
-    socket.send(JSON.stringify(requestParam))
-  })
+  // callbackAfterGetHosts((hostList) => {
+  //   console.log(hostList)
+  //   data.value = hostList
+  //   const requestParam = {
+  //     id: '1',
+  //     method: 'ssh.startMonitor',
+  //     params: hostList.map((e) => {
+  //       return {
+  //         port: e.port,
+  //         host: e.host,
+  //         user: e.user,
+  //         passwd: e.passwd,
+  //       }
+  //     }),
+  //   }
+  //   socket.send(JSON.stringify(requestParam))
+  // })
 })
 </script>
 
