@@ -3,7 +3,9 @@
 
 <template>
   <DetailsBox>
-    hello
+    <div>
+      <GraphicsCardInfo />
+    </div>
   </DetailsBox>
 </template>
 

@@ -22,6 +22,7 @@
           title="PAGE CACHE"
           color="gray"
         />
+        <!-- TODO: circle bar -->
       </div>
     </div>
   </DetailsBox>
