@@ -17,14 +17,14 @@ const props = defineProps({
     default: 0,
   },
 })
-
+const TOTAL_HINTS = 60
 const hintCounters = computed(() => {
   return {
-    sys: Math.round(props.sys * 50),
-    user: Math.round(props.user * 50),
-    iowait: Math.round(props.iowait * 50),
-    steal: Math.round(props.steal * 50),
-    remain: 50 - Math.round(props.sys * 50) - Math.round(props.user * 50) - Math.round(props.iowait * 50) - Math.round(props.steal * 50),
+    sys: Math.round(props.sys * TOTAL_HINTS),
+    user: Math.round(props.user * TOTAL_HINTS),
+    iowait: Math.round(props.iowait * TOTAL_HINTS),
+    steal: Math.round(props.steal * TOTAL_HINTS),
+    remain: TOTAL_HINTS - Math.round(props.sys * TOTAL_HINTS) - Math.round(props.user * TOTAL_HINTS) - Math.round(props.iowait * TOTAL_HINTS) - Math.round(props.steal * TOTAL_HINTS),
   }
 })
 onMounted(() => {
@@ -64,7 +64,7 @@ onMounted(() => {
     />
     <!-- remain -->
     <ColorHint
-      v-for="i in hintCounters.remain"
+      v-for="i in (hintCounters.remain >= 0 ? hintCounters.remain : 0)"
       :key="i"
       color="gray"
       class="w-1"
