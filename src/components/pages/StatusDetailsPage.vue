@@ -18,7 +18,7 @@ const router = useRouter()
     </div>
     <div class="content-box flex">
       <!-- left -->
-      <div class="flex-1 overflow-auto p-2 flex flex-col gap-4">
+      <div class="flex-1 overflow-auto p-2 flex flex-col gap-4 scrollbar-hide">
         <CPUBox />
         <MemoryBox />
         <GraphicsBox />
@@ -37,9 +37,5 @@ const router = useRouter()
 .content-box {
   --content-height: calc(100% - 2.25rem);
   height: var(--content-height);
-}
-
-.content-box > div::-webkit-scrollbar {
-  display: none;
 }
 </style>

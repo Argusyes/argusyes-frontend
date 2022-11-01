@@ -4,7 +4,7 @@
 <template>
   <n-card
     :bordered="false"
-    class="rounded-lg bg-white/5"
+    class="rounded-lg bg-white/2"
   >
     <div class="flex flex-col gap-2">
       <div class="flex justify-between">
