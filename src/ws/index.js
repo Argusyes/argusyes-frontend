@@ -1,8 +1,6 @@
 import _ from 'lodash'
 const URL = 'ws://localhost:9097/monitor'
 
-export const socket = new WebSocket(URL)
-
 class CallbacksCollection {
   static callbacks = new Map()
   static INSTANCE = null
@@ -38,89 +36,66 @@ class CallbacksCollection {
 }
 const callbacksCollection = CallbacksCollection.getInstance()
 
-// events
-socket.onmessage = function (event) {
-  if (event.data) {
-    const data = JSON.parse(event.data)
+export const ws = {
+  socket: null,
+  callbacksCollection,
+  createSocket(url = URL) {
+    if (!ws.socket)
+      ws.socket = new WebSocket(url)
 
-    if (data.id !== null)
-      callbacksCollection.run(data.id, event)
+    return ws.socket
+  },
+  send(requestParam) {
+    ws.socket?.send(JSON.stringify(requestParam))
+  },
+  sendWithId(method, params, cbf) {
+    const id = _.uniqueId('id_')
+    if (typeof cbf === 'function')
+      callbacksCollection.on(id, cbf)
 
-    if (data?.method === 'ssh.notification') {
-      const eventName = data?.params?.[0]?.event
+    ws.send({ id, method, params })
+
+    return id
+  },
+  setup: {
+    setHandler(eventName, handleFunc) {
       switch (eventName) {
-        case 'rough':
-          console.log('rough', data)
-          break
-        case 'temp':
-          console.log('temp', data)
-          break
-        case 'cpuInfo':
-          console.log('cpuInfo', data)
-          break
-        case 'cpuPerformance':
-          console.log('cpuPerformance', data)
-          break
-        case 'uptime':
-          console.log('uptime', data)
-          break
-        case 'loadavg':
-          console.log('loadavg', data)
-          break
-        case 'memoryPerformance':
-          console.log('memoryPerformance', data)
-          break
-        case 'netStat':
-          console.log('netStat', data)
-          break
-        case 'netDev':
-          console.log('netDev', data)
-          break
-        case 'disk':
-          console.log('disk', data)
+        case 'onmessage':
+        case 'onopen':
+        case 'onclose':
+          ws.socket[eventName] = handleFunc
           break
         default:
-          console.error(eventName)
+          break
       }
-    }
-  }
-}
-socket.onopen = function (event) {
-  console.log('onopen', event)
-}
-socket.onclose = function (event) {
-  console.log('onclose', event)
-}
-
-function send(requestParam) {
-  socket.send(JSON.stringify(requestParam))
-}
-
-function sendWithId(method, params, cbf) {
-  const id = _.uniqueId('id_')
-  if (typeof cbf === 'function')
-    callbacksCollection.on(id, cbf)
-
-  send({ id, method, params })
-
-  return id
-}
-
-export const ws = {
-  socket,
-  callbacksCollection,
+    },
+  },
   // apis
   api: {
     startMonitor(params, cbf) {
-      return sendWithId(
+      return ws.sendWithId(
         'ssh.startMonitor',
         params,
         cbf,
       )
     },
+    stopMonitor(params, cbf) {
+      return ws.sendWithId(
+        'ssh.stopMonitor',
+        params,
+        cbf,
+      )
+    },
     startRoughMonitor(params, cbf) {
-      return sendWithId(
+      return ws.sendWithId(
         'ssh.startRoughMonitor',
+        params,
+        cbf,
+      )
+    },
+    stopRoughMonitor(params, cbf) {
+      return ws.sendWithId(
+        'ssh.stopRoughMonitor',
         params,
         cbf,
       )

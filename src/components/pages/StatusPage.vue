@@ -36,6 +36,55 @@ function callbackAfterGetHosts(cb) {
   }
 }
 
+ws.setup.setHandler(
+  'onmessage',
+  (event) => {
+    if (event.data) {
+      const data = JSON.parse(event.data)
+
+      if (data.id !== null)
+        ws.callbacksCollection.run(data.id, event)
+
+      if (data?.method === 'ssh.notification') {
+        const eventName = data?.params?.[0]?.event
+        switch (eventName) {
+          case 'rough':
+            console.log('rough', data)
+            break
+          case 'temp':
+            console.log('temp', data)
+            break
+          case 'cpuInfo':
+            console.log('cpuInfo', data)
+            break
+          case 'cpuPerformance':
+            console.log('cpuPerformance', data)
+            break
+          case 'uptime':
+            console.log('uptime', data)
+            break
+          case 'loadavg':
+            console.log('loadavg', data)
+            break
+          case 'memoryPerformance':
+            console.log('memoryPerformance', data)
+            break
+          case 'netStat':
+            console.log('netStat', data)
+            break
+          case 'netDev':
+            console.log('netDev', data)
+            break
+          case 'disk':
+            console.log('disk', data)
+            break
+          default:
+            console.error(eventName)
+        }
+      }
+    }
+  },
+)
 onMounted(() => {
   callbackAfterGetHosts((hostList) => {
     data.value = hostList
@@ -47,10 +96,29 @@ onMounted(() => {
         passwd: e.passwd,
       }
     })
-    const id = ws.api.startMonitor(params, (event) => {
-      console.log('----- cb -----', event)
-    })
+    const id = ws.api.startRoughMonitor(
+      params,
+      (event) => {
+        console.log('----- cb: startRoughMonitor -----', event)
+      },
+    )
   })
+})
+onUnmounted(() => {
+  const params = data.value.map((e) => {
+    return {
+      port: e.port,
+      host: e.host,
+      user: e.user,
+      // passwd: e.passwd,
+    }
+  })
+  const id = ws.api.stopRoughMonitor(
+    params,
+    (event) => {
+      console.log('----- cb: stopRoughMonitor -----', event)
+    },
+  )
 })
 </script>
 

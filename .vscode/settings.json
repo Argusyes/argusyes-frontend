@@ -15,6 +15,7 @@
     "datetimerange",
     "GEFORCE",
     "IOWAIT",
+    "loadavg",
     "minwidth",
     "RETRANS",
     "sider"

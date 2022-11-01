@@ -27,6 +27,21 @@ watchEffect(() => {
   if (!store.jwt && route.path !== '/login')
     router.push('/login')
 })
+
+ws.createSocket()
+ws.setup.setHandler(
+  'onopen',
+  (event) => {
+    console.log('open', event)
+  },
+)
+ws.setup.setHandler(
+  'onclose',
+  (event) => {
+    console.log('closed', event)
+  },
+)
+window.ws = ws
 </script>
 
 <template>
