@@ -110,7 +110,6 @@ onUnmounted(() => {
       port: e.port,
       host: e.host,
       user: e.user,
-      // passwd: e.passwd,
     }
   })
   const id = ws.api.stopRoughMonitor(

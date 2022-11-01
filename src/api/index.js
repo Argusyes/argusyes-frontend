@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { useStore } from '@/store'
 
 // 配置 Mock 和 生产环境的 URL
 const URL = {
@@ -12,11 +13,20 @@ const requestCreator = () => {
   const axiosInstance = axios.create({
     baseURL: URL.PROD,
   })
-  axiosInstance.interceptors.response.use((response) => {
-    if (response.status !== 200)
-      throw new Error(response.data.message)
-    return response.data
-  })
+  axiosInstance.interceptors.response.use(
+    (response) => {
+      if (response.status !== 200)
+        throw new Error(response.data.message)
+
+      return response.data
+    },
+    (error) => {
+      if (error.response.status === 403) {
+        const store = useStore()
+        store.jwt = ''
+      }
+    },
+  )
 
   return axiosInstance
 }
