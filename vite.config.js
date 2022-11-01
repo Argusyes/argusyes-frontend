@@ -32,6 +32,9 @@ export default defineConfig({
           'dayjs': [
             ['default', 'dayjs'],
           ],
+          'lodash': [
+            ['default', '_'],
+          ],
         },
       ],
       dirs: [
