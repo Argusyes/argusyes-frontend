@@ -1,10 +1,11 @@
 <script setup>
+const store = useStore()
 </script>
 
 <template>
   <n-card
-    :bordered="false"
-    class="rounded-xl"
+    :bordered="!store.mode"
+    class="rounded-xl shadow-md"
   >
     <slot />
   </n-card>

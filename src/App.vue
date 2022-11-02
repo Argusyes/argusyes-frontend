@@ -5,6 +5,11 @@ const store = useStore()
 const route = useRoute()
 const router = useRouter()
 
+const theme = computed(() => {
+  if (store.mode)
+    return darkTheme
+  return null
+})
 const locale = computed(() => {
   return store.lang === 'zh' ? zhCN : null
 })
@@ -45,7 +50,7 @@ window.ws = ws
 </script>
 
 <template>
-  <n-config-provider :theme="darkTheme" :locale="locale" :date-locale="dateLocale">
+  <n-config-provider :theme="theme" :locale="locale" :date-locale="dateLocale">
     <n-loading-bar-provider>
       <n-message-provider>
         <n-notification-provider>

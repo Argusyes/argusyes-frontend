@@ -1,4 +1,6 @@
 <script setup>
+const store = useStore()
+
 const timeInfoFirLine = ref(dayjs().format('MM/DD/YYYY'))
 const timeInfoSecLine = ref(dayjs().format('ddd'))
 const timeInfoThirdLine = ref(dayjs().format('HH:mm:ss'))
@@ -11,7 +13,7 @@ function renderCustomHeader() {
   return h(
     'div',
     {
-      class: 'p-2 flex flex-col justify-center items-center gap-2 text-white',
+      class: `p-2 flex flex-col justify-center items-center gap-2 text-${store.mode ? 'white' : 'black'}`,
     },
     [
       h(
@@ -64,8 +66,6 @@ onMounted(() => {
       <i-material-symbols-nest-clock-farsight-analog-outline />
     </n-button>
   </n-dropdown>
-  <!-- <span>{{ timeInfoFirLine }}</span>
-    <span>{{ timeInfoSecLine }}</span> -->
 </template>
 
 <style scoped>

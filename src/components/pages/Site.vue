@@ -2,6 +2,7 @@
 import StatusIcon from '~icons/icon-park-solid/dashboard-one'
 import HostsIcon from '~icons/icon-park-solid/server'
 
+const store = useStore()
 const router = useRouter()
 const menuSelected = ref(router.currentRoute.value.name)
 
@@ -27,18 +28,29 @@ const handleUpdateValue = (key, item) => {
 
 <template>
   <n-layout position="absolute" content-style="display: flex; flex-direction: column;">
-    <n-layout-header class="p-2 flex justify-between items-center">
-      <i-ic-baseline-remove-red-eye class="text-gray-800 text-2xl mr-2" />
+    <n-layout-header
+      :bordered="!store.mode"
+      class="p-2 flex justify-between items-center"
+    >
+      <i-ic-baseline-remove-red-eye
+        class="text-2xl mr-2"
+        :class="{
+          'text-gray-800': store.mode,
+          'text-gray-300': !store.mode,
+        }"
+      />
       <n-gradient-text class="text-2xl" type="danger">
         Argusyes
       </n-gradient-text>
       <div class="flex-1" />
       <Time />
       <Lang />
+      <LightDarkSwitch />
       <NavAccount />
     </n-layout-header>
     <n-layout has-sider class="flex-1">
       <n-layout-sider
+        :bordered="!store.mode"
         collapse-mode="width"
         :collapsed-width="50"
         :width="240"

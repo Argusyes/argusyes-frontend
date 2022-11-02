@@ -5,7 +5,7 @@ const router = useRouter()
 <template>
   <n-layout
     position="absolute"
-    content-style="padding: 2rem;"
+    content-style="padding: 2rem 2rem 0;"
   >
     <div class="flex items-center h-9">
       <n-button
@@ -18,7 +18,7 @@ const router = useRouter()
     </div>
     <div class="content-box flex">
       <!-- left -->
-      <div class="flex-1 overflow-auto p-2 flex flex-col gap-4 scrollbar-hide">
+      <div class="flex-1 overflow-auto p-2 pb-8 flex flex-col gap-4 scrollbar-hide">
         <CPUBox />
         <MemoryBox />
         <GraphicsBox />
