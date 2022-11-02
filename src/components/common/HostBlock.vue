@@ -9,6 +9,8 @@ const emit = defineEmits([
   'deleteHost',
 ])
 
+const store = useStore()
+
 // events
 function handleEditHost() {
   emit('editHost', props.data)
@@ -22,7 +24,7 @@ function handleDeleteHost() {
   <n-card
     :title="props.data.name"
     size="huge"
-    :bordered="false"
+    :bordered="!store.mode"
     class="rounded-xl cursor-pointer"
   >
     <template #header-extra>

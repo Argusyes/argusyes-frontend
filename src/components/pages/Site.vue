@@ -4,7 +4,7 @@ import HostsIcon from '~icons/icon-park-solid/server'
 
 const store = useStore()
 const router = useRouter()
-const menuSelected = ref(router.currentRoute.value.name)
+const menuSelected = ref(router.currentRoute.value.path.split('/')[1])
 
 const menuOptions = [
   {

@@ -6,6 +6,7 @@ const props = defineProps({
   },
 })
 
+const store = useStore()
 const router = useRouter()
 const percentage = ref(10)
 
@@ -24,7 +25,7 @@ function handleBlockClick() {
   <n-card
     :title="props.data.name"
     size="huge"
-    :bordered="false"
+    :bordered="!store.mode"
     class="rounded-xl cursor-pointer"
     @click="handleBlockClick"
   >

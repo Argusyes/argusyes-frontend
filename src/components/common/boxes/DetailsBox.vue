@@ -5,7 +5,7 @@ const store = useStore()
 <template>
   <n-card
     :bordered="!store.mode"
-    class="rounded-xl shadow-md"
+    class="rounded-xl"
   >
     <slot />
   </n-card>

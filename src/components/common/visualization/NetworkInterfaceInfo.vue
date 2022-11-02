@@ -1,10 +1,15 @@
 <script setup>
+const store = useStore()
 </script>
 
 <template>
   <n-card
     :bordered="false"
-    class="rounded-lg bg-white/2"
+    class="rounded-lg"
+    :class="{
+      'bg-white/2': store.mode,
+      'bg-black/2': !store.mode,
+    }"
   >
     <div class="flex flex-col gap-2">
       <div class="flex justify-between">
