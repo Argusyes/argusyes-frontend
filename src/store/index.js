@@ -13,9 +13,13 @@ export const useStore = defineStore('main', () => {
     password: '',
   })
   const rememberLoginInfo = useStorage('remember-login-info', true)
+
   const accountInfo = ref({
     username: '',
   })
+
+  const rough = ref(null)
+
   return {
     jwt,
     lang,
@@ -23,6 +27,9 @@ export const useStore = defineStore('main', () => {
     sidebar,
     loginInfo,
     rememberLoginInfo,
+    /* ------------ */
     accountInfo,
+    /* ------------ */
+    rough,
   }
 })

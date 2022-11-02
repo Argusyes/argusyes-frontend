@@ -1,6 +1,7 @@
 import _ from 'lodash'
-const URL = 'ws://localhost:9097/monitor'
+import { useStore } from '@/store'
 
+const URL = 'ws://localhost:9097/monitor'
 class CallbacksCollection {
   static callbacks = new Map()
   static INSTANCE = null
@@ -100,5 +101,43 @@ export const ws = {
         cbf,
       )
     },
+  },
+}
+
+export const wsHandler = {
+  handleRough(data) {
+    const store = useStore()
+    const {
+      params: [{ message }],
+    } = data
+    console.log('--- rough ---', message)
+    store.rough = message
+  },
+  handleTemp() {
+    //
+  },
+  handleCPUInfo() {
+    //
+  },
+  handleCPUPerformance() {
+    //
+  },
+  handleUptime() {
+    //
+  },
+  handleLoadavg() {
+    //
+  },
+  handleMemoryPerformance() {
+    //
+  },
+  handleNetStat() {
+    //
+  },
+  handleNetDev() {
+    //
+  },
+  handleDisk() {
+    //
   },
 }

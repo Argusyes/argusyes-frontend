@@ -49,7 +49,7 @@ ws.setup.setHandler(
         const eventName = data?.params?.[0]?.event
         switch (eventName) {
           case 'rough':
-            console.log('rough', data)
+            wsHandler.handleRough(data)
             break
           case 'temp':
             console.log('temp', data)
