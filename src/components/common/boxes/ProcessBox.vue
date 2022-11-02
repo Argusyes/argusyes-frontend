@@ -169,8 +169,8 @@ const tmpData = [
 </script>
 
 <template>
-  <DetailsBox class="max-h-full overflow-auto scrollbar-hide">
-    <div class="relative">
+  <DetailsBox>
+    <div>
       <div class="layout secondary-text">
         <span>PROCESS</span>
         <span class="justify-self-end">CPU %</span>

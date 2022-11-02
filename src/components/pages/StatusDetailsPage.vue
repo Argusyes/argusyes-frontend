@@ -26,7 +26,7 @@ const router = useRouter()
         <HardDiskBox />
       </div>
       <!-- right -->
-      <div class="flex-1 overflow-auto p-2 flex flex-col gap-4">
+      <div class="flex-1 overflow-auto p-2 pb-8 flex flex-col gap-4 scrollbar-hide">
         <ProcessBox />
       </div>
     </div>
