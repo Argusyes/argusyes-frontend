@@ -7,6 +7,7 @@ export const useStore = defineStore('main', () => {
   const jwt = useStorage('jwt', '')
   const lang = useStorage('lang', 'zh')
   const mode = useStorage('mode', true)
+  const sidebar = useStorage('sidebar', true)
   const loginInfo = useStorage('login-info', {
     username: '',
     password: '',
@@ -19,6 +20,7 @@ export const useStore = defineStore('main', () => {
     jwt,
     lang,
     mode,
+    sidebar,
     loginInfo,
     rememberLoginInfo,
     accountInfo,

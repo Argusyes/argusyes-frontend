@@ -53,10 +53,12 @@ const handleUpdateValue = (key, item) => {
         :bordered="!store.mode"
         collapse-mode="width"
         :collapsed-width="50"
+        :collapsed="store.sidebar"
         :width="240"
         show-trigger="bar"
         :show-collapse-content="false"
         :native-scrollbar="false"
+        @update:collapsed="store.sidebar = !store.sidebar"
       >
         <n-menu
           v-model:value="menuSelected"
