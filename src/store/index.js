@@ -18,6 +18,7 @@ export const useStore = defineStore('main', () => {
     username: '',
   })
 
+  const hostList = ref(null)
   const rough = ref({})
 
   return {
@@ -30,6 +31,7 @@ export const useStore = defineStore('main', () => {
     /* ------------ */
     accountInfo,
     /* ------------ */
+    hostList,
     rough,
   }
 })

@@ -146,7 +146,7 @@ onUnmounted(() => {
     </div>
     <n-grid
       x-gap="24"
-      y-gap="12"
+      y-gap="24"
       cols="1 1376:2 "
     >
       <n-gi v-for="(item, index) in data" :key="index">
@@ -157,5 +157,4 @@ onUnmounted(() => {
 </template>
 
 <style scoped>
-
 </style>

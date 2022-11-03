@@ -18,7 +18,7 @@ const id = computed(() => {
 const data = computed(() => {
   const roughInfo = store.rough[id.value]
   return {
-    temp: (roughInfo?.temp.highestTemp ?? 0) / 1000,
+    temp: roughInfo?.temp.highestTemp,
     cpu: (roughInfo?.cpu?.utilization ?? 0) / 100,
     loadavg: {
       one: (roughInfo?.loadavg.oneOccupy ?? 0) / 100,
@@ -58,7 +58,7 @@ function handleBlockClick() {
   router.push({
     name: 'statusDetails',
     params: {
-      name: 'lab',
+      name: props.data.name,
     },
   })
 }
@@ -73,8 +73,13 @@ function handleBlockClick() {
     @click="handleBlockClick"
   >
     <template #header-extra>
-      <i-uil-temperature class="text-red-500" />
-      {{ data.temp }}℃
+      <div
+        v-if="data.temp"
+        class="flex gap-1 items-center"
+      >
+        <i-uil-temperature class="text-red-500" />
+        {{ data.temp / 1000 }}℃
+      </div>
     </template>
     <div class="flex items-center justify-between gap-8">
       <!-- cpu -->

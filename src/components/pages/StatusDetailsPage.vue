@@ -1,5 +1,6 @@
 <script setup>
 const router = useRouter()
+const route = useRoute()
 </script>
 
 <template>
@@ -7,7 +8,7 @@ const router = useRouter()
     position="absolute"
     content-style="padding: 2rem 2rem 0;"
   >
-    <div class="flex items-center h-9">
+    <div class="flex items-center gap-2 h-12">
       <n-button
         circle
         quaternary
@@ -15,6 +16,9 @@ const router = useRouter()
       >
         <i-material-symbols-arrow-back />
       </n-button>
+      <span class="font-semibold text-3xl">
+        {{ route.params.name }}
+      </span>
     </div>
     <div class="content-box flex">
       <!-- left -->
