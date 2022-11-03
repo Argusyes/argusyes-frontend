@@ -146,8 +146,8 @@ onUnmounted(() => {
     </div>
     <n-grid
       x-gap="24"
-      y-gap="24"
-      cols="1 1000:2 1500:3"
+      y-gap="12"
+      cols="1 1376:2 "
     >
       <n-gi v-for="(item, index) in data" :key="index">
         <StatusBlock :data="item" />

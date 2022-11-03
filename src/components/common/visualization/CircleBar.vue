@@ -98,7 +98,7 @@ circle {
   transform-origin: center;
 }
 .bar-background {
-  @apply stroke-gray-600/50;
+  @apply stroke-gray-600/30;
   transform: scale(0.9091);
 }
 .bar {

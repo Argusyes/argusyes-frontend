@@ -28,17 +28,17 @@ const data = computed(() => {
     memory: {
       availableMemOccupy: roughInfo?.memory?.availableMemOccupy ?? 1,
       freeMemOccupy: roughInfo?.memory?.freeMemOccupy ?? 1,
-      swapFreeOccupy: roughInfo?.memory?.swapFreeOccupy ?? 0,
+      swapFreeOccupy: roughInfo?.memory?.swapFreeOccupy ?? 1,
     },
     net: {
       downBytesH: roughInfo?.net.downBytesH ?? 0,
-      downBytesHUnit: roughInfo?.disk.downBytesHUnit ?? '',
+      downBytesHUnit: roughInfo?.net.downBytesHUnit ?? '',
       downSpeed: roughInfo?.net.downSpeed ?? 0,
-      downSpeedUnit: roughInfo?.disk.downSpeedUnit ?? '',
+      downSpeedUnit: roughInfo?.net.downSpeedUnit ?? '',
       upBytesH: roughInfo?.net.upBytesH ?? 0,
-      upBytesHUnit: roughInfo?.disk.upBytesHUnit ?? '',
+      upBytesHUnit: roughInfo?.net.upBytesHUnit ?? '',
       upSpeed: roughInfo?.net.upSpeed ?? 0,
-      upSpeedUnit: roughInfo?.disk.upSpeedUnit ?? '',
+      upSpeedUnit: roughInfo?.net.upSpeedUnit ?? '',
     },
     disk: {
       read: roughInfo?.disk.read ?? 0,
@@ -69,14 +69,15 @@ function handleBlockClick() {
     :title="props.data.name"
     size="huge"
     :bordered="!store.mode"
-    class="rounded-xl cursor-pointer"
+    class="rounded-xl cursor-pointer min-w-[43rem]"
     @click="handleBlockClick"
   >
     <template #header-extra>
       <i-uil-temperature class="text-red-500" />
       {{ data.temp }}℃
     </template>
-    <div class="flex items-center justify-between gap-4">
+    <div class="flex items-center justify-between gap-8">
+      <!-- cpu -->
       <div
         class="flex gap-4"
         @click.stop="cpuToggle = !cpuToggle"
@@ -115,6 +116,7 @@ function handleBlockClick() {
           />
         </div>
       </div>
+      <!-- mem -->
       <div
         class="flex gap-4"
         @click.stop="memToggle = !memToggle"
@@ -134,51 +136,49 @@ function handleBlockClick() {
           title="Swap"
         />
       </div>
-      <div class="flex flex-col justify-between gap-1">
-        <div class="flex justify-between items-center gap-3">
-          <DataWithTitle
-            :num="8"
-            unit="K/s"
-            title="↑/S"
-          />
-          <DataWithTitle
-            :num="72"
-            unit="K/s"
-            title="↓/S"
-          />
-          <DataWithTitle
-            :num="104"
-            unit="G"
-            title="↑"
-          />
-          <DataWithTitle
-            :num="98"
-            unit="G"
-            title="↓"
-          />
-        </div>
-        <div class="flex justify-between items-center gap-3">
-          <DataWithTitle
-            :num="8"
-            unit="K/s"
-            title="read/s"
-          />
-          <DataWithTitle
-            :num="72"
-            unit="K/s"
-            title="write/s"
-          />
-          <DataWithTitle
-            :num="104"
-            unit="G"
-            title="Read"
-          />
-          <DataWithTitle
-            :num="98"
-            unit="G"
-            title="Write"
-          />
-        </div>
+      <div class="grid grid-cols-4 grid-rows-2 w-min-[25rem]">
+        <!-- net -->
+        <DataWithTitle
+          :num="data.net.upSpeed"
+          :unit="data.net.upSpeedUnit"
+          title="↑/S"
+        />
+        <DataWithTitle
+          :num="data.net.downSpeed"
+          :unit="data.net.downSpeedUnit"
+          title="↓/S"
+        />
+        <DataWithTitle
+          :num="data.net.upBytesH"
+          :unit="data.net.upBytesHUnit"
+          title="↑"
+        />
+        <DataWithTitle
+          :num="data.net.downBytesH"
+          :unit="data.net.downBytesHUnit"
+          title="↓"
+        />
+        <!-- disk -->
+        <DataWithTitle
+          :num="data.disk.readRate"
+          :unit="data.disk.readRateUnit"
+          title="read/s"
+        />
+        <DataWithTitle
+          :num="data.disk.writeRate"
+          :unit="data.disk.writeRateUnit"
+          title="write/s"
+        />
+        <DataWithTitle
+          :num="data.disk.read"
+          :unit="data.disk.readUnit"
+          title="Read"
+        />
+        <DataWithTitle
+          :num="data.disk.write"
+          :unit="data.disk.writeUnit"
+          title="Write"
+        />
       </div>
     </div>
   </n-card>

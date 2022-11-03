@@ -106,6 +106,7 @@ export const ws = {
 
 export const wsHandler = {
   handleRough(data) {
+    console.log('--- rough ---', data)
     const store = useStore()
     const {
       params: [{ message }],
