@@ -18,7 +18,7 @@ export const useStore = defineStore('main', () => {
     username: '',
   })
 
-  const rough = ref(null)
+  const rough = ref({})
 
   return {
     jwt,

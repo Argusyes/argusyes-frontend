@@ -1,4 +1,5 @@
 <script setup>
+const store = useStore()
 const message = useMessage()
 
 const data = ref([])
@@ -96,7 +97,7 @@ onMounted(() => {
         passwd: e.passwd,
       }
     })
-    const id = ws.api.startRoughMonitor(
+    ws.api.startRoughMonitor(
       params,
       (event) => {
         console.log('----- cb: startRoughMonitor -----', event)
@@ -146,7 +147,7 @@ onUnmounted(() => {
     <n-grid
       x-gap="24"
       y-gap="24"
-      cols="1 800:2 1200:3 1600:4"
+      cols="1 1000:2 1500:3"
     >
       <n-gi v-for="(item, index) in data" :key="index">
         <StatusBlock :data="item" />

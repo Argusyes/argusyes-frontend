@@ -10,7 +10,11 @@ const props = defineProps({
   },
   percentage: {
     type: Number,
-    default: 50,
+    default: 0,
+  },
+  showPercentage: {
+    type: Boolean,
+    default: true,
   },
   title: {
     type: String,
@@ -19,6 +23,10 @@ const props = defineProps({
   divide: {
     type: Array,
     default: () => [(1 / 3), (2 / 3)],
+  },
+  strokeWidth: {
+    type: String,
+    default: '10%',
   },
 })
 
@@ -52,6 +60,9 @@ const colorCSSClass = computed(() => {
           cy="50"
           fill="transparent"
           class="bar-background"
+          :style="{
+            strokeWidth: props.strokeWidth,
+          }"
         />
         <circle
           r="50"
@@ -62,9 +73,15 @@ const colorCSSClass = computed(() => {
           :stroke-dashoffset="Math.PI * 100 * (1 - props.percentage)"
           class="bar"
           :class="[colorCSSClass]"
+          :style="{
+            strokeWidth: props.strokeWidth,
+          }"
         />
       </svg>
-      <div class="percentage-text font-light">
+      <div
+        v-if="props.showPercentage"
+        class="percentage-text font-light"
+      >
         {{ (props.percentage * 100).toFixed(0) }}%
       </div>
     </div>

@@ -110,8 +110,20 @@ export const wsHandler = {
     const {
       params: [{ message }],
     } = data
-    console.log('--- rough ---', message)
-    store.rough = message
+    const {
+      CPU: cpu,
+      Disk: disk,
+      Loadavg: loadavg,
+      Memory: memory,
+      Net: net,
+      Temp: temp,
+      host,
+      port,
+      user,
+    } = message
+    const id = `${user}@${host}:${port}`
+    store.rough[id] = { cpu, disk, loadavg, memory, net, temp }
+    // store.rough = message
   },
   handleTemp() {
     //
