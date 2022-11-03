@@ -37,55 +37,6 @@ function callbackAfterGetHosts(cb) {
   }
 }
 
-ws.setup.setHandler(
-  'onmessage',
-  (event) => {
-    if (event.data) {
-      const data = JSON.parse(event.data)
-
-      if (data.id !== null)
-        ws.callbacksCollection.run(data.id, event)
-
-      if (data?.method === 'ssh.notification') {
-        const eventName = data?.params?.[0]?.event
-        switch (eventName) {
-          case 'rough':
-            wsHandler.handleRough(data)
-            break
-          case 'temp':
-            console.log('temp', data)
-            break
-          case 'cpuInfo':
-            console.log('cpuInfo', data)
-            break
-          case 'cpuPerformance':
-            console.log('cpuPerformance', data)
-            break
-          case 'uptime':
-            console.log('uptime', data)
-            break
-          case 'loadavg':
-            console.log('loadavg', data)
-            break
-          case 'memoryPerformance':
-            console.log('memoryPerformance', data)
-            break
-          case 'netStat':
-            console.log('netStat', data)
-            break
-          case 'netDev':
-            console.log('netDev', data)
-            break
-          case 'disk':
-            console.log('disk', data)
-            break
-          default:
-            console.error(eventName)
-        }
-      }
-    }
-  },
-)
 onMounted(() => {
   callbackAfterGetHosts((hostList) => {
     data.value = hostList
@@ -101,6 +52,17 @@ onMounted(() => {
       params,
       (event) => {
         console.log('----- cb: startRoughMonitor -----', event)
+      },
+    )
+    ws.api.startMonitor(
+      [{
+        host: '10.128.248.93',
+        user: 'cc',
+        port: 22,
+        passwd: 'chenchen',
+      }],
+      (event) => {
+        console.log('----- cb: startMonitor -----', event)
       },
     )
   })

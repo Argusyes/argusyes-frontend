@@ -48,6 +48,7 @@ export const ws = {
   },
   send(requestParam) {
     ws.socket?.send(JSON.stringify(requestParam))
+    console.log(requestParam)
   },
   sendWithId(method, params, cbf) {
     const id = _.uniqueId('id_')
@@ -106,11 +107,11 @@ export const ws = {
 
 export const wsHandler = {
   handleRough(data) {
-    console.log('--- rough ---', data)
-    const store = useStore()
     const {
       params: [{ message }],
     } = data
+    // console.log('--- rough ---', message)
+    const store = useStore()
     const {
       CPU: cpu,
       Disk: disk,
@@ -126,31 +127,125 @@ export const wsHandler = {
     store.rough[id] = { cpu, disk, loadavg, memory, net, temp }
     // store.rough = message
   },
-  handleTemp() {
-    //
+  handleTemp(data) {
+    const {
+      params: [{
+        message: {
+          tempMap,
+          ...hostInfo
+        },
+      }],
+    } = data
+    // console.log('--- temp ---', tempMap, hostInfo)
   },
-  handleCPUInfo() {
-    //
+  handleCPUInfo(data) {
+    const {
+      params: [{
+        message: {
+          cpuInfo,
+          ...hostInfo
+        },
+      }],
+    } = data
+    console.log('--- cpu info ---', cpuInfo, hostInfo)
   },
-  handleCPUPerformance() {
-    //
+  handleCPUPerformance(data) {
+    const {
+      params: [{
+        message: {
+          cpuPerformance,
+          total,
+          ...hostInfo
+        },
+      }],
+    } = data
+    // console.log('--- cpu performance ---', cpuPerformance, total, hostInfo)
   },
-  handleUptime() {
-    //
+  handleUptime(data) {
+    const {
+      params: [{
+        message: {
+          uptime,
+          ...hostInfo
+        },
+      }],
+    } = data
+    // console.log('--- uptime ---', uptime, hostInfo)
   },
-  handleLoadavg() {
-    //
+  handleLoadavg(data) {
+    const {
+      params: [{
+        message: {
+          loadavg,
+          ...hostInfo
+        },
+      }],
+    } = data
+    // console.log('--- loadavg ---', loadavg, hostInfo)
   },
-  handleMemoryPerformance() {
-    //
+  handleMemoryPerformance(data) {
+    const {
+      params: [{
+        message: {
+          memory,
+          ...hostInfo
+        },
+      }],
+    } = data
+    // console.log('--- memory performance ---', memory, hostInfo)
   },
-  handleNetStat() {
-    //
+  handleNetStat(data) {
+    const {
+      params: [{
+        message: {
+          netTCP,
+          netUDP,
+          ...hostInfo
+        },
+      }],
+    } = data
+    // console.log('--- net stat ---', netTCP, netUDP, hostInfo)
   },
-  handleNetDev() {
-    //
+  handleNetDev(data) {
+    const {
+      params: [{
+        message: {
+          netDevTotal,
+          netDev,
+          ...hostInfo
+        },
+      }],
+    } = data
+    // console.log('--- net dev ---', netDevTotal, netDev, hostInfo)
   },
-  handleDisk() {
-    //
+  handleDisk(data) {
+    const {
+      params: [{
+        message: {
+          diskMap,
+          read,
+          readUnit,
+          readRate,
+          readRateUnit,
+          write,
+          writeUnit,
+          writeRate,
+          writeRateUnit,
+          ...hostInfo
+        },
+      }],
+    } = data
+    // console.log('--- disk ---', diskMap, read, readUnit, readRate, readRateUnit, write, writeUnit, writeRate, writeRateUnit, hostInfo)
+  },
+  handleProcess(data) {
+    const {
+      params: [{
+        message: {
+          process,
+          ...hostInfo
+        },
+      }],
+    } = data
+    // console.log('--- process ---', process, hostInfo)
   },
 }

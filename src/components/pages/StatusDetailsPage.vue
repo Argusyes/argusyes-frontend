@@ -1,6 +1,49 @@
 <script setup>
 const router = useRouter()
 const route = useRoute()
+const message = useMessage()
+
+const hostInfo = ref(undefined)
+
+onMounted(() => {
+  ws.api.startMonitor(
+    [{
+      host: '10.128.248.93',
+      user: 'cc',
+      port: 22,
+      passwd: 'chenchen',
+    }],
+    (event) => {
+      console.log('----- cb: startMonitor -----', event)
+    },
+  )
+  // const resp = await api.hostsPage.getHostList({
+  //   name: route.params.name,
+  // })
+  // if (resp.code !== 200)
+  //   message.error(resp.msg)
+  // const hostList = resp.data
+  // if (hostList.length === 1) {
+  //   hostInfo.value = hostList[0]
+  //   const [{ host, name, passwd, port, user }] = hostList
+  //   console.log(host, name, passwd, port, user)
+  //   ws.api.startMonitor(
+  //     { port, host, user, passwd },
+  //     (event) => {
+  //       console.log('----- cb: startMonitor -----', event)
+  //     },
+  //   )
+  // }
+})
+
+onUnmounted(() => {
+  ws.api.stopMonitor(
+    [hostInfo.value],
+    (event) => {
+      console.log('----- cb: stopMonitor -----', event)
+    },
+  )
+})
 </script>
 
 <template>
