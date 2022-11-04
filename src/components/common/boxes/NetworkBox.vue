@@ -1,4 +1,6 @@
 <script setup>
+const store = useStore()
+const { net } = storeToRefs(store)
 </script>
 
 <template>
@@ -6,24 +8,26 @@
     <div>
       <div class="flex justify-between items-center">
         <DataWithTitle
-          :num="8"
-          unit="K/s"
+          :num="Math.round(net.netDevTotal?.upSpeed ?? 0)"
+          :unit="net.netDevTotal?.upSpeedUnit ?? ''"
           title="↑/S"
+          class="w-14"
         />
         <DataWithTitle
-          :num="72"
-          unit="K/s"
+          :num="Math.round(net.netDevTotal?.downSpeed ?? 0)"
+          :unit="net.netDevTotal?.downSpeedUnit ?? ''"
           title="↓/S"
+          class="w-14"
         />
         <DataWithTitle
-          :num="104"
-          unit="G"
+          :num="Math.round(net.netDevTotal?.upBytesH ?? 0)"
+          :unit="net.netDevTotal?.upBytesHUnit ?? ''"
           title="↑"
           color="yellow"
         />
         <DataWithTitle
-          :num="98"
-          unit="G"
+          :num="Math.round(net.netDevTotal?.downBytesH ?? 0)"
+          :unit="net.netDevTotal?.downBytesHUnit ?? ''"
           title="↓"
           color="green"
         />
@@ -37,15 +41,15 @@
           title="RETRANS"
         />
         <DataWithTitle
-          :num="1032397799"
+          :num="net.netTCP?.activeOpens ?? 0"
           title="ACTIVE"
         />
         <DataWithTitle
-          :num="159890"
+          :num="net.netTCP?.passiveOpens ?? 0"
           title="PASSIVE"
         />
         <DataWithTitle
-          :num="1032397799"
+          :num="net.netTCP?.failOpens ?? 0"
           title="FAILS"
         />
       </div>

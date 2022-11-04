@@ -1,7 +1,7 @@
 <script setup>
 const props = defineProps({
   pid: {
-    type: String,
+    type: Number,
     required: true,
   },
   name: {

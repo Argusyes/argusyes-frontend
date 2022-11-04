@@ -217,6 +217,8 @@ export const wsHandler = {
       }],
     } = data
     // console.log('--- net stat ---', netTCP, netUDP, hostInfo)
+    store.net.netTCP = netTCP
+    store.net.netUDP = netUDP
   },
   handleNetDev(data) {
     const store = useStore()
@@ -230,6 +232,8 @@ export const wsHandler = {
       }],
     } = data
     // console.log('--- net dev ---', netDevTotal, netDev, hostInfo)
+    store.net.netDevTotal = netDevTotal
+    store.net.netDev = netDev
   },
   handleDisk(data) {
     const store = useStore()
