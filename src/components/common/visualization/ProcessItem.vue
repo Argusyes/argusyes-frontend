@@ -1,7 +1,16 @@
 <script setup>
 const props = defineProps({
+  pid: {
+    type: String,
+    required: true,
+  },
   name: {
     type: String,
+    required: true,
+  },
+  memUnit: {
+    type: String,
+    default: '',
     required: true,
   },
   mem: {
@@ -19,7 +28,10 @@ const props = defineProps({
 
 <template>
   <div class="layout">
-    <n-ellipsis>{{ props.name }}</n-ellipsis>
+    <span>{{ props.pid }}</span>
+    <n-ellipsis class="font-semibold">
+      {{ props.name }}
+    </n-ellipsis>
     <NumWithUnit
       :num="props.cpu"
       unit="%"
@@ -27,7 +39,7 @@ const props = defineProps({
     />
     <NumWithUnit
       :num="props.mem"
-      unit="M"
+      :unit="props.memUnit"
       class="justify-end"
     />
   </div>
@@ -35,6 +47,6 @@ const props = defineProps({
 
 <style scoped>
 .layout {
-  @apply grid grid-cols-[1fr,6rem,6rem] gap-2;
+  @apply grid grid-cols-[6rem,1fr,6rem,6rem] gap-2;
 }
 </style>

@@ -262,5 +262,6 @@ export const wsHandler = {
       }],
     } = data
     // console.log('--- process ---', process, hostInfo)
+    store.process.process = process
   },
 }

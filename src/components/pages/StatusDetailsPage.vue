@@ -71,7 +71,7 @@ onUnmounted(() => {
 
 <style>
 .content-box {
-  --content-height: calc(100% - 2.25rem);
+  --content-height: calc(100% - 3rem);
   height: var(--content-height);
 }
 </style>
