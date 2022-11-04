@@ -50,19 +50,8 @@ onMounted(() => {
     })
     ws.api.startRoughMonitor(
       params,
-      (event) => {
-        console.log('----- cb: startRoughMonitor -----', event)
-      },
-    )
-    ws.api.startMonitor(
-      [{
-        host: '10.128.248.93',
-        user: 'cc',
-        port: 22,
-        passwd: 'chenchen',
-      }],
-      (event) => {
-        console.log('----- cb: startMonitor -----', event)
+      (event, data) => {
+        console.log('----- cb: startRoughMonitor -----', event, data)
       },
     )
   })
@@ -77,8 +66,8 @@ onUnmounted(() => {
   })
   const id = ws.api.stopRoughMonitor(
     params,
-    (event) => {
-      console.log('----- cb: stopRoughMonitor -----', event)
+    (event, data) => {
+      console.log('----- cb: stopRoughMonitor -----', event, data)
     },
   )
 })

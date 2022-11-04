@@ -48,7 +48,7 @@ export const ws = {
   },
   send(requestParam) {
     ws.socket?.send(JSON.stringify(requestParam))
-    console.log(requestParam)
+    console.log('send', requestParam)
   },
   sendWithId(method, params, cbf) {
     const id = _.uniqueId('id_')
@@ -147,7 +147,7 @@ export const wsHandler = {
         },
       }],
     } = data
-    console.log('--- cpu info ---', cpuInfo, hostInfo)
+    // console.log('--- cpu info ---', cpuInfo, hostInfo)
   },
   handleCPUPerformance(data) {
     const {
@@ -159,7 +159,7 @@ export const wsHandler = {
         },
       }],
     } = data
-    // console.log('--- cpu performance ---', cpuPerformance, total, hostInfo)
+    console.log('--- cpu performance ---', cpuPerformance, total, hostInfo)
   },
   handleUptime(data) {
     const {

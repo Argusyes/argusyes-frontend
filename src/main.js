@@ -33,7 +33,7 @@ ws.setup.setHandler(
       const data = JSON.parse(event.data)
 
       if (data.id !== null)
-        ws.callbacksCollection.run(data.id, event)
+        ws.callbacksCollection.run(data.id, event, data)
 
       if (data?.method === 'ssh.notification') {
         const eventName = data?.params?.[0]?.event
