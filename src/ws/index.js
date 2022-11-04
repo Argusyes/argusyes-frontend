@@ -203,6 +203,7 @@ export const wsHandler = {
       }],
     } = data
     // console.log('--- memory performance ---', memory, hostInfo)
+    store.mem.memory = memory
   },
   handleNetStat(data) {
     const store = useStore()
