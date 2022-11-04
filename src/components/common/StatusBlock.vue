@@ -21,9 +21,9 @@ const data = computed(() => {
     temp: roughInfo?.temp.highestTemp,
     cpu: (roughInfo?.cpu?.utilization ?? 0) / 100,
     loadavg: {
-      one: (roughInfo?.loadavg.oneOccupy ?? 0) / 100,
-      five: (roughInfo?.loadavg.fiveOccupy ?? 0) / 100,
-      fifteen: (roughInfo?.loadavg.fifteenOccupy ?? 0) / 100,
+      one: roughInfo?.loadavg.oneOccupy ?? 0,
+      five: roughInfo?.loadavg.fiveOccupy ?? 0,
+      fifteen: roughInfo?.loadavg.fifteenOccupy ?? 0,
     },
     memory: {
       availableMemOccupy: roughInfo?.memory?.availableMemOccupy ?? 1,

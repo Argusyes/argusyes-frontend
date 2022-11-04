@@ -24,7 +24,7 @@ const coresUsageList = computed(() => {
 <template>
   <DetailsBox>
     <div>
-      <div class="flex justify-between items-center">
+      <div class="grid grid-cols-5">
         <NumWithUnit
           :num="Math.round(cpu.total?.utilization ?? 0)"
           unit="%"
@@ -35,24 +35,28 @@ const coresUsageList = computed(() => {
           unit="%"
           title="SYS"
           color="red"
+          class="justify-self-end"
         />
         <DataWithTitle
           :num="Math.round(cpu.total?.user ?? 0)"
           unit="%"
           title="USER"
           color="green"
+          class="justify-self-end"
         />
         <DataWithTitle
           :num="Math.round(cpu.total?.IO ?? 0)"
           unit="%"
           title="IOWAIT"
           color="purple"
+          class="justify-self-end"
         />
         <DataWithTitle
           :num="Math.round(cpu.total?.steal ?? 0)"
           unit="%"
           title="STEAL"
           color="yellow"
+          class="justify-self-end"
         />
       </div>
       <n-divider />
