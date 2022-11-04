@@ -92,7 +92,10 @@ const virList = computed(() => {
               <i-ic-outline-keyboard-arrow-right v-else class="text-red-500 text-lg" />
             </span>
           </div>
-          <n-collapse-transition :show="showVirtual">
+          <n-collapse-transition
+            :show="showVirtual"
+            class="mt-4"
+          >
             <div class="flex flex-col gap-4">
               <NetworkInterfaceInfo
                 v-for="item in virList"

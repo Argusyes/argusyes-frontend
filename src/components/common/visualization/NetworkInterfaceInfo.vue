@@ -39,13 +39,13 @@ const showGreenWifiLogo = computed(() => {
       </div>
       <div class="flex justify-between items-center">
         <DataWithTitle
-          :num="Math.round(props.data.downSpeed ?? 0)"
+          :num="Math.round(props.data.upSpeed ?? 0)"
           :unit="props.data.upSpeedUnit ?? ''"
           title="↑/S"
           class="w-14"
         />
         <DataWithTitle
-          :num="Math.round(data.downSpeed ?? 0)"
+          :num="Math.round(props.data.downSpeed ?? 0)"
           :unit="props.data.downSpeedUnit ?? ''"
           title="↓/S"
           class="w-14"
