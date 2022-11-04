@@ -1,6 +1,24 @@
 <script setup>
 const store = useStore()
 const { net } = storeToRefs(store)
+
+const showVirtual = ref(false)
+const devList = computed(() => {
+  if (!store.net.netDev)
+    return []
+  const tmpArr = _.values(store.net.netDev)
+  return tmpArr.filter((e) => {
+    return !e.virtual
+  })
+})
+const virList = computed(() => {
+  if (!store.net.netDev)
+    return []
+  const tmpArr = _.values(store.net.netDev)
+  return tmpArr.filter((e) => {
+    return e.virtual
+  })
+})
 </script>
 
 <template>
@@ -56,9 +74,34 @@ const { net } = storeToRefs(store)
       <n-divider />
       <div class="flex flex-col gap-4">
         <NetworkInterfaceInfo
-          v-for="i in 2"
-          :key="i"
+          v-for="item in devList"
+          :key="item.name + item.ip"
+          :data="item"
         />
+        <div v-if="virList.length > 0">
+          <div
+            class="flex justify-between cursor-pointer secondary-text"
+            @click="showVirtual = !showVirtual"
+          >
+            <span>
+              VIRTUAL INTERFACES
+            </span>
+            <span class="flex items-center gap-1">
+              {{ virList.length }}
+              <i-ic-outline-keyboard-arrow-down v-if="showVirtual" class="text-red-400 text-lg" />
+              <i-ic-outline-keyboard-arrow-right v-else class="text-red-500 text-lg" />
+            </span>
+          </div>
+          <n-collapse-transition :show="showVirtual">
+            <div class="flex flex-col gap-4">
+              <NetworkInterfaceInfo
+                v-for="item in virList"
+                :key="item.name + item.ip"
+                :data="item"
+              />
+            </div>
+          </n-collapse-transition>
+        </div>
       </div>
     </div>
   </DetailsBox>
