@@ -1,4 +1,24 @@
 <script setup>
+const store = useStore()
+const { cpu } = storeToRefs(store)
+
+const coresNum = computed(() => {
+  return _.keys(store.cpu.cpuPerformance).length
+})
+
+const coresUsageList = computed(() => {
+  if (!store.cpu.cpuPerformance)
+    return []
+
+  return _.values(store.cpu.cpuPerformance).map((e) => {
+    return {
+      sys: e.system / 100,
+      user: e.user / 100,
+      iowait: e.IO / 100,
+      steal: e.steal / 100,
+    }
+  })
+})
 </script>
 
 <template>
@@ -6,51 +26,51 @@
     <div>
       <div class="flex justify-between items-center">
         <NumWithUnit
-          :num="75"
+          :num="Math.round(cpu.total?.utilization ?? 0)"
           unit="%"
           font-size="text-4xl"
         />
         <DataWithTitle
-          :num="24"
+          :num="Math.round(cpu.total?.system ?? 0)"
           unit="%"
           title="SYS"
           color="red"
         />
         <DataWithTitle
-          :num="52"
+          :num="Math.round(cpu.total?.user ?? 0)"
           unit="%"
           title="USER"
           color="green"
         />
         <DataWithTitle
-          :num="0"
+          :num="Math.round(cpu.total?.IO ?? 0)"
           unit="%"
           title="IOWAIT"
           color="purple"
         />
         <DataWithTitle
-          :num="0"
+          :num="Math.round(cpu.total?.steal ?? 0)"
           unit="%"
           title="STEAL"
           color="yellow"
         />
       </div>
       <n-divider />
-      <CPUCoresUsage />
+      <CPUCoresUsage :data="coresUsageList" />
       <n-divider />
       <div class="flex justify-between items-center">
         <DataWithTitle
-          :num="8"
+          :num="coresNum"
           title="CORES"
         />
         <DataWithTitle
-          :num="72"
+          :num="Math.round(cpu.total?.free ?? 100)"
           unit="%"
           title="IDLE"
         />
         <DataWithTitle
-          :num="52"
-          unit="D"
+          :num="Math.round(cpu.total?.totalTime ?? 0)"
+          :unit="cpu.total?.totalTimeUnit ?? ''"
           title="UPTIME"
         />
         <!--  TODO: load 1/5/15m -->

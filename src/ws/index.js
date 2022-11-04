@@ -128,6 +128,7 @@ export const wsHandler = {
     // store.rough = message
   },
   handleTemp(data) {
+    const store = useStore()
     const {
       params: [{
         message: {
@@ -139,6 +140,7 @@ export const wsHandler = {
     // console.log('--- temp ---', tempMap, hostInfo)
   },
   handleCPUInfo(data) {
+    const store = useStore()
     const {
       params: [{
         message: {
@@ -148,8 +150,10 @@ export const wsHandler = {
       }],
     } = data
     // console.log('--- cpu info ---', cpuInfo, hostInfo)
+    store.cpu.cpuInfo = cpuInfo
   },
   handleCPUPerformance(data) {
+    const store = useStore()
     const {
       params: [{
         message: {
@@ -159,9 +163,12 @@ export const wsHandler = {
         },
       }],
     } = data
-    console.log('--- cpu performance ---', cpuPerformance, total, hostInfo)
+    // console.log('--- cpu performance ---', cpuPerformance, total, hostInfo)
+    store.cpu.cpuPerformance = cpuPerformance
+    store.cpu.total = total
   },
   handleUptime(data) {
+    const store = useStore()
     const {
       params: [{
         message: {
@@ -173,6 +180,7 @@ export const wsHandler = {
     // console.log('--- uptime ---', uptime, hostInfo)
   },
   handleLoadavg(data) {
+    const store = useStore()
     const {
       params: [{
         message: {
@@ -182,8 +190,10 @@ export const wsHandler = {
       }],
     } = data
     // console.log('--- loadavg ---', loadavg, hostInfo)
+    store.cpu.loadavg = loadavg
   },
   handleMemoryPerformance(data) {
+    const store = useStore()
     const {
       params: [{
         message: {
@@ -195,6 +205,7 @@ export const wsHandler = {
     // console.log('--- memory performance ---', memory, hostInfo)
   },
   handleNetStat(data) {
+    const store = useStore()
     const {
       params: [{
         message: {
@@ -207,6 +218,7 @@ export const wsHandler = {
     // console.log('--- net stat ---', netTCP, netUDP, hostInfo)
   },
   handleNetDev(data) {
+    const store = useStore()
     const {
       params: [{
         message: {
@@ -219,6 +231,7 @@ export const wsHandler = {
     // console.log('--- net dev ---', netDevTotal, netDev, hostInfo)
   },
   handleDisk(data) {
+    const store = useStore()
     const {
       params: [{
         message: {
@@ -238,6 +251,7 @@ export const wsHandler = {
     // console.log('--- disk ---', diskMap, read, readUnit, readRate, readRateUnit, write, writeUnit, writeRate, writeRateUnit, hostInfo)
   },
   handleProcess(data) {
+    const store = useStore()
     const {
       params: [{
         message: {

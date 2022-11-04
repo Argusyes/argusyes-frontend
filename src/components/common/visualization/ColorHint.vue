@@ -4,7 +4,7 @@ const props = defineProps({
     type: String,
     default: 'none',
     validator(value) {
-      return ['none', 'gray', 'red', 'green', 'purple', 'yellow'].includes(value)
+      return ['none', 'gray', 'background-gray', 'red', 'green', 'purple', 'yellow'].includes(value)
     },
   },
 })

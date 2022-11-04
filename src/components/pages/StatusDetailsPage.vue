@@ -6,17 +6,6 @@ const message = useMessage()
 const hostInfo = ref(undefined)
 
 onMounted(async () => {
-  // ws.api.startMonitor(
-  //   [{
-  //     host: '10.128.248.93',
-  //     user: 'cc',
-  //     port: 22,
-  //     passwd: 'chenchen',
-  //   }],
-  //   (event) => {
-  //     console.log('----- cb: startMonitor -----', event)
-  //   },
-  // )
   const resp = await api.hostsPage.getHostList({
     name: route.params.name,
   })
@@ -28,7 +17,7 @@ onMounted(async () => {
     const [{ host, name, passwd, port, user }] = hostList
     console.log(host, name, passwd, port, user)
     ws.api.startMonitor(
-      { port, host, user, passwd },
+      [{ port, host, user, passwd }],
       (event, data) => {
         console.log('----- cb: startMonitor -----', event, data)
       },

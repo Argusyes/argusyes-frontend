@@ -18,6 +18,7 @@ export default defineConfig({
         'vue',
         'vue-router',
         {
+          'pinia': ['storeToRefs'],
           '@vueuse/core': [
             // named imports
             // 'useMouse', // import { useMouse } from '@vueuse/core',

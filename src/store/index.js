@@ -18,8 +18,12 @@ export const useStore = defineStore('main', () => {
     username: '',
   })
 
-  const hostList = ref(null)
   const rough = ref({})
+  const cpu = ref({})
+  const mem = ref({})
+  const net = ref({})
+  const disk = ref({})
+  const process = ref({})
 
   return {
     jwt,
@@ -31,7 +35,11 @@ export const useStore = defineStore('main', () => {
     /* ------------ */
     accountInfo,
     /* ------------ */
-    hostList,
     rough,
+    cpu,
+    mem,
+    net,
+    disk,
+    process,
   }
 })

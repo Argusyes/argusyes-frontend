@@ -27,9 +27,6 @@ const hintCounters = computed(() => {
     remain: TOTAL_HINTS - Math.round(props.sys * TOTAL_HINTS) - Math.round(props.user * TOTAL_HINTS) - Math.round(props.iowait * TOTAL_HINTS) - Math.round(props.steal * TOTAL_HINTS),
   }
 })
-onMounted(() => {
-  window.hintCounters = hintCounters
-})
 </script>
 
 <template>
@@ -66,7 +63,7 @@ onMounted(() => {
     <ColorHint
       v-for="i in (hintCounters.remain >= 0 ? hintCounters.remain : 0)"
       :key="i"
-      color="gray"
+      color="background-gray"
       class="w-1"
     />
   </div>

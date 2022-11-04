@@ -10,6 +10,9 @@
 .gray {
   @apply bg-gray-500;
 }
+.background-gray {
+  @apply bg-gray-500/20;
+}
 .red {
   @apply bg-red-500;
 }
