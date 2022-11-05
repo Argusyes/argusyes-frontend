@@ -239,21 +239,23 @@ export const wsHandler = {
     const store = useStore()
     const {
       params: [{
-        message: {
-          diskMap,
-          read,
-          readUnit,
-          readRate,
-          readRateUnit,
-          write,
-          writeUnit,
-          writeRate,
-          writeRateUnit,
-          ...hostInfo
-        },
+        // message: {
+        //   diskMap,
+        //   read,
+        //   readUnit,
+        //   readRate,
+        //   readRateUnit,
+        //   write,
+        //   writeUnit,
+        //   writeRate,
+        //   writeRateUnit,
+        //   ...hostInfo
+        // },
+        message,
       }],
     } = data
     // console.log('--- disk ---', diskMap, read, readUnit, readRate, readRateUnit, write, writeUnit, writeRate, writeRateUnit, hostInfo)
+    store.disk = message
   },
   handleProcess(data) {
     const store = useStore()
