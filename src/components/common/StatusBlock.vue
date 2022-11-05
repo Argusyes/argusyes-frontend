@@ -28,7 +28,8 @@ const data = computed(() => {
     memory: {
       availableMemOccupy: roughInfo?.memory?.availableMemOccupy ?? 1,
       freeMemOccupy: roughInfo?.memory?.freeMemOccupy ?? 1,
-      swapFreeOccupy: roughInfo?.memory?.swapFreeOccupy ?? 1,
+      // TODO: change name
+      cacheSwapOccupy: roughInfo?.memory?.cacheSwapOccupy ?? 0,
     },
     net: {
       downBytesH: roughInfo?.net.downBytesH ?? 0,
@@ -137,7 +138,7 @@ function handleBlockClick() {
           v-show="!memToggle"
           :width="70"
           :height="70"
-          :percentage="data.memory.swapFreeOccupy"
+          :percentage="data.memory.cacheSwapOccupy"
           title="Swap"
         />
       </div>

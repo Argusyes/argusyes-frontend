@@ -1,9 +1,17 @@
 <script setup>
+import { round } from 'lodash'
+
 const store = useStore()
 const { disk } = storeToRefs(store)
 
 const diskList = computed(() => {
-  return store.disk.diskMap ?? []
+  return _.values(store.disk.diskMap).sort((a, b) => {
+    if (a.mount > b.mount)
+      return 1
+    if (a.mount < b.mount)
+      return -1
+    return 0
+  }) ?? []
 })
 </script>
 
@@ -11,25 +19,25 @@ const diskList = computed(() => {
   <DetailsBox>
     <div class="flex justify-between">
       <DataWithTitle
-        :num="disk.readRate ?? 0"
+        :num="round(disk.readRate ?? 0, 1)"
         :unit="disk.readRateUnit"
         title="read/s"
         class="w-18"
       />
       <DataWithTitle
-        :num="disk.writeRate ?? 0"
+        :num="round(disk.writeRate ?? 0, 1)"
         :unit="disk.writeRateUnit"
         title="write/s"
         class="w-18"
       />
       <DataWithTitle
-        :num="disk.read ?? 0"
+        :num="round(disk.read ?? 0, 1)"
         :unit="disk.readUnit"
         title="Read"
         class="w-18"
       />
       <DataWithTitle
-        :num="disk.write ?? 0"
+        :num="round(disk.write ?? 0, 1)"
         :unit="disk.writeUnit"
         title="Write"
       />

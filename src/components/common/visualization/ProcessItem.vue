@@ -1,4 +1,6 @@
 <script setup>
+import { round } from 'lodash'
+
 const props = defineProps({
   pid: {
     type: Number,
@@ -33,12 +35,12 @@ const props = defineProps({
       {{ props.name }}
     </n-ellipsis>
     <NumWithUnit
-      :num="props.cpu"
+      :num="round(props.cpu, 1)"
       unit="%"
       class="justify-end"
     />
     <NumWithUnit
-      :num="props.mem"
+      :num="round(props.mem, 1)"
       :unit="props.memUnit"
       class="justify-end"
     />

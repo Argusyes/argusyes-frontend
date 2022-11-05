@@ -1,4 +1,6 @@
 <script setup>
+import { round } from 'lodash'
+
 const props = defineProps({
   sys: {
     type: Number,
@@ -20,11 +22,11 @@ const props = defineProps({
 const TOTAL_HINTS = 60
 const hintCounters = computed(() => {
   return {
-    sys: Math.round(props.sys * TOTAL_HINTS),
-    user: Math.round(props.user * TOTAL_HINTS),
-    iowait: Math.round(props.iowait * TOTAL_HINTS),
-    steal: Math.round(props.steal * TOTAL_HINTS),
-    remain: TOTAL_HINTS - Math.round(props.sys * TOTAL_HINTS) - Math.round(props.user * TOTAL_HINTS) - Math.round(props.iowait * TOTAL_HINTS) - Math.round(props.steal * TOTAL_HINTS),
+    sys: round(props.sys * TOTAL_HINTS),
+    user: round(props.user * TOTAL_HINTS),
+    iowait: round(props.iowait * TOTAL_HINTS),
+    steal: round(props.steal * TOTAL_HINTS),
+    remain: TOTAL_HINTS - round(props.sys * TOTAL_HINTS) - round(props.user * TOTAL_HINTS) - round(props.iowait * TOTAL_HINTS) - round(props.steal * TOTAL_HINTS),
   }
 })
 </script>

@@ -1,19 +1,20 @@
 <script setup>
-import _ from 'lodash'
+import { round } from 'lodash'
+
 const props = defineProps({
   fileSystem: {
     type: String,
     required: true,
     default: '',
   },
-  free: {
+  used: {
     type: Number,
     required: true,
   },
-  freeUnit: {
+  usedUnit: {
     type: String,
     required: true,
-    default: 'GB',
+    default: 'MB',
   },
   freeRate: {
     type: Number,
@@ -26,7 +27,7 @@ const props = defineProps({
   totalUnit: {
     type: String,
     required: true,
-    default: 'GB',
+    default: 'MB',
   },
 })
 const store = useStore()
@@ -41,7 +42,7 @@ const store = useStore()
       <div>
         <span>
           <!-- TODO: need usage, cannot calculate with different unit -->
-          {{ _.round(props.total - props.free, 2) }} {{ props.totalUnit }}
+          {{ round(props.used, 1) }} {{ props.usedUnit }}
         </span>
         <span class="secondary-text"> / {{ props.total }} {{ props.totalUnit }}</span>
       </div>

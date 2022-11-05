@@ -1,4 +1,6 @@
 <script setup>
+import { round } from 'lodash'
+
 const store = useStore()
 const { net } = storeToRefs(store)
 
@@ -26,25 +28,26 @@ const virList = computed(() => {
     <div>
       <div class="flex justify-between items-center">
         <DataWithTitle
-          :num="Math.round(net.netDevTotal?.upSpeed ?? 0)"
+          :num="round(net.netDevTotal?.upSpeed ?? 0, 1)"
           :unit="net.netDevTotal?.upSpeedUnit ?? ''"
           title="↑/S"
-          class="w-14"
+          class="w-16"
         />
         <DataWithTitle
-          :num="Math.round(net.netDevTotal?.downSpeed ?? 0)"
+          :num="round(net.netDevTotal?.downSpeed ?? 0, 1)"
           :unit="net.netDevTotal?.downSpeedUnit ?? ''"
           title="↓/S"
-          class="w-14"
+          class="w-16"
         />
         <DataWithTitle
-          :num="Math.round(net.netDevTotal?.upBytesH ?? 0)"
+          :num="round(net.netDevTotal?.upBytesH ?? 0, 1)"
           :unit="net.netDevTotal?.upBytesHUnit ?? ''"
           title="↑"
           color="yellow"
+          class="w-16"
         />
         <DataWithTitle
-          :num="Math.round(net.netDevTotal?.downBytesH ?? 0)"
+          :num="round(net.netDevTotal?.downBytesH ?? 0, 1)"
           :unit="net.netDevTotal?.downBytesHUnit ?? ''"
           title="↓"
           color="green"

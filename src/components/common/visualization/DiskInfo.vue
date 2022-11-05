@@ -1,4 +1,6 @@
 <script setup>
+import { round } from 'lodash'
+
 const props = defineProps({
   data: {
     type: Object,
@@ -28,14 +30,14 @@ const store = useStore()
       </div>
       <StorageBar
         :file-system="props.data.fileSystem"
-        :free="props.data.free"
-        :free-unit="props.data.freeUnit"
+        :used="props.data.used"
+        :used-unit="props.data.usedUnit"
         :free-rate="props.data.freeRate"
         :total="props.data.total"
         :total-unit="props.data.totalUnit"
       />
     </div>
-    <!-- <n-divider /> -->
+    <n-divider />
     <div class="grid grid-cols-5 grid-rows-3">
       <!-- first line -->
       <div class="secondary-text">
@@ -59,11 +61,11 @@ const store = useStore()
         R
       </div>
       <NumWithUnit
-        :num="props.data.readRate ?? 0"
+        :num="round(props.data.readRate ?? 0, 1)"
         :unit="`${props.data.readRateUnit ?? 'B'}/s`"
       />
       <NumWithUnit
-        :num="props.data.read ?? 0"
+        :num="round(props.data.read ?? 0, 1)"
         :unit="props.data.readUnit ?? 'B'"
       />
       <NumWithUnit
@@ -77,11 +79,11 @@ const store = useStore()
         W
       </div>
       <NumWithUnit
-        :num="props.data.writeRate ?? 0"
+        :num="round(props.data.writeRate ?? 0, 1)"
         :unit="`${props.data.writeRateUnit ?? 'B'}/s`"
       />
       <NumWithUnit
-        :num="props.data.write ?? 0"
+        :num="round(props.data.write ?? 0, 1)"
         :unit="props.data.writeUnit ?? 'B'"
       />
       <NumWithUnit

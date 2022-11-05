@@ -1,4 +1,6 @@
 <script setup>
+import { round } from 'lodash'
+
 const store = useStore()
 const { mem } = storeToRefs(store)
 </script>
@@ -8,19 +10,19 @@ const { mem } = storeToRefs(store)
     <div>
       <div class="flex justify-between items-center">
         <DataWithTitle
-          :num="Math.round(mem.memory?.freeMem ?? 0)"
+          :num="round(mem.memory?.freeMem ?? 0, 1)"
           :unit="mem.memory?.freeMemUnit ?? ''"
           title="FREE"
         />
         <!-- TODO: backend should apply this info (unit) -->
         <DataWithTitle
-          :num="Math.round((mem.memory?.totalMem ?? 0) - (mem.memory?.freeMem ?? 0) - (mem.memory?.cached ?? 0))"
-          :unit="mem.memory?.freeMemUnit ?? ''"
+          :num="round(mem.memory?.usedMem ?? 0, 1)"
+          :unit="mem.memory?.usedMemUnit ?? ''"
           title="USED"
           color="green"
         />
         <DataWithTitle
-          :num="Math.round(mem.memory?.cached ?? 0)"
+          :num="round(mem.memory?.cached ?? 0, 1)"
           :unit="mem.memory?.cachedUnit ?? ''"
           title="PAGE CACHE"
           color="gray"

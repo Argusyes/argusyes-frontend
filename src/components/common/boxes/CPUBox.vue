@@ -1,4 +1,6 @@
 <script setup>
+import { round } from 'lodash'
+
 const store = useStore()
 const { cpu } = storeToRefs(store)
 
@@ -26,33 +28,33 @@ const coresUsageList = computed(() => {
     <div>
       <div class="grid grid-cols-5">
         <NumWithUnit
-          :num="Math.round(cpu.total?.utilization ?? 0)"
+          :num="round(cpu.total?.utilization ?? 0)"
           unit="%"
           font-size="text-4xl"
         />
         <DataWithTitle
-          :num="Math.round(cpu.total?.system ?? 0)"
+          :num="round(cpu.total?.system ?? 0)"
           unit="%"
           title="SYS"
           color="red"
           class="justify-self-end"
         />
         <DataWithTitle
-          :num="Math.round(cpu.total?.user ?? 0)"
+          :num="round(cpu.total?.user ?? 0)"
           unit="%"
           title="USER"
           color="green"
           class="justify-self-end"
         />
         <DataWithTitle
-          :num="Math.round(cpu.total?.IO ?? 0)"
+          :num="round(cpu.total?.IO ?? 0)"
           unit="%"
           title="IOWAIT"
           color="purple"
           class="justify-self-end"
         />
         <DataWithTitle
-          :num="Math.round(cpu.total?.steal ?? 0)"
+          :num="round(cpu.total?.steal ?? 0)"
           unit="%"
           title="STEAL"
           color="yellow"
@@ -68,12 +70,12 @@ const coresUsageList = computed(() => {
           title="CORES"
         />
         <DataWithTitle
-          :num="Math.round(cpu.total?.free ?? 100)"
+          :num="round(cpu.total?.free ?? 100)"
           unit="%"
           title="IDLE"
         />
         <DataWithTitle
-          :num="Math.round(cpu.total?.totalTime ?? 0)"
+          :num="round(cpu.total?.totalTime ?? 0)"
           :unit="cpu.total?.totalTimeUnit ?? ''"
           title="UPTIME"
         />

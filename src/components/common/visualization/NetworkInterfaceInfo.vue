@@ -1,4 +1,6 @@
 <script setup>
+import { round } from 'lodash'
+
 const props = defineProps({
   data: {
     type: Object,
@@ -39,30 +41,30 @@ const showGreenWifiLogo = computed(() => {
       </div>
       <div class="flex justify-between items-center">
         <DataWithTitle
-          :num="Math.round(props.data.upSpeed ?? 0)"
+          :num="round(props.data.upSpeed ?? 0, 1)"
           :unit="props.data.upSpeedUnit ?? ''"
           title="↑/S"
-          class="w-14"
+          class="w-16"
         />
         <DataWithTitle
-          :num="Math.round(props.data.downSpeed ?? 0)"
+          :num="round(props.data.downSpeed ?? 0, 1)"
           :unit="props.data.downSpeedUnit ?? ''"
           title="↓/S"
-          class="w-14"
+          class="w-16"
         />
         <DataWithTitle
-          :num="Math.round(props.data.upBytesH ?? 0)"
+          :num="round(props.data.upBytesH ?? 0, 1)"
           :unit="props.data.upBytesHUnit ?? ''"
           title="↑"
           color="yellow"
-          class="w-14"
+          class="w-16"
         />
         <DataWithTitle
-          :num="Math.round(props.data.downBytesH ?? 0)"
+          :num="round(props.data.downBytesH ?? 0, 1)"
           :unit="props.data.downBytesHUnit ?? ''"
           title="↓"
           color="green"
-          class="w-14"
+          class="w-16"
         />
         <!-- TODO: circle bar -->
       </div>
