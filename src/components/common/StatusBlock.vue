@@ -26,9 +26,8 @@ const data = computed(() => {
       fifteen: roughInfo?.loadavg.fifteenOccupy ?? 0,
     },
     memory: {
-      availableMemOccupy: roughInfo?.memory?.availableMemOccupy ?? 1,
+      usedMemOccupy: roughInfo?.memory?.usedMemOccupy ?? 0,
       freeMemOccupy: roughInfo?.memory?.freeMemOccupy ?? 1,
-      // TODO: change name
       cacheSwapOccupy: roughInfo?.memory?.cacheSwapOccupy ?? 0,
     },
     net: {
@@ -131,7 +130,7 @@ function handleBlockClick() {
           v-show="memToggle"
           :width="70"
           :height="70"
-          :percentage="1 - data.memory.availableMemOccupy"
+          :percentage="data.memory.usedMemOccupy"
           title="Mem"
         />
         <CircleBar

@@ -14,7 +14,6 @@ const { mem } = storeToRefs(store)
           :unit="mem.memory?.freeMemUnit ?? ''"
           title="FREE"
         />
-        <!-- TODO: backend should apply this info (unit) -->
         <DataWithTitle
           :num="round(mem.memory?.usedMem ?? 0, 1)"
           :unit="mem.memory?.usedMemUnit ?? ''"

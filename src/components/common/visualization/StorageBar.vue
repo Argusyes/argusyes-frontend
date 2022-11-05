@@ -41,7 +41,6 @@ const store = useStore()
       </div>
       <div>
         <span>
-          <!-- TODO: need usage, cannot calculate with different unit -->
           {{ round(props.used, 1) }} {{ props.usedUnit }}
         </span>
         <span class="secondary-text"> / {{ props.total }} {{ props.totalUnit }}</span>
