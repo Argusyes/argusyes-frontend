@@ -6,6 +6,7 @@ import i18n from '@/locale/i18n'
 import 'virtual:windi.css'
 import './style.css'
 import { ws, wsHandler } from '@/ws'
+import { useStore } from '@/store'
 
 ws.createSocket()
 ws.setup.setHandler(
@@ -17,12 +18,19 @@ ws.setup.setHandler(
       .use(createPinia())
       .use(i18n)
       .mount('#app')
+
+    const store = useStore()
+    store.wsConnection = true
   },
 )
 ws.setup.setHandler(
   'onclose',
   (event) => {
     console.log('closed', event)
+    const store = useStore()
+    store.wsConnection = false
+    store.clearRough()
+    store.clearDetails()
   },
 )
 

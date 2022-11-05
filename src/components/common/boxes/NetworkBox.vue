@@ -56,6 +56,7 @@ const virList = computed(() => {
       </div>
       <n-divider />
       <div class="flex justify-between items-center">
+        <!-- TODO: can't find RETRANS -->
         <DataWithTitle
           :num="8"
           unit="%"

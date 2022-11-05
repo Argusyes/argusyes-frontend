@@ -18,12 +18,25 @@ export const useStore = defineStore('main', () => {
     username: '',
   })
 
+  const wsConnection = ref(undefined)
+
   const rough = ref({})
   const cpu = ref({})
   const mem = ref({})
   const net = ref({})
   const disk = ref({})
   const process = ref({})
+
+  function clearRough() {
+    rough.value = {}
+  }
+  function clearDetails() {
+    cpu.value = {}
+    mem.value = {}
+    net.value = {}
+    disk.value = {}
+    process.value = {}
+  }
 
   return {
     jwt,
@@ -35,11 +48,16 @@ export const useStore = defineStore('main', () => {
     /* ------------ */
     accountInfo,
     /* ------------ */
+    wsConnection,
+    /* ------------ */
     rough,
     cpu,
     mem,
     net,
     disk,
     process,
+    /* ------------ */
+    clearRough,
+    clearDetails,
   }
 })

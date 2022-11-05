@@ -1,6 +1,7 @@
 <script setup>
 const router = useRouter()
 const route = useRoute()
+const store = useStore()
 const message = useMessage()
 
 const hostInfo = ref(undefined)
@@ -30,6 +31,7 @@ onUnmounted(() => {
     [hostInfo.value],
     (event, data) => {
       console.log('----- cb: stopMonitor -----', event, data)
+      store.clearDetails()
     },
   )
 })
