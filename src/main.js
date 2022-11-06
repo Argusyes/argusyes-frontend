@@ -8,81 +8,11 @@ import './style.css'
 import { ws, wsHandler } from '@/ws'
 import { useStore } from '@/store'
 
+const app = createApp(App)
+  .use(router)
+  .use(createPinia())
+  .use(i18n)
+app.mount('#app')
+
 ws.createSocket()
-ws.setup.setHandler(
-  'onopen',
-  (event) => {
-    console.log('open', event)
-    createApp(App)
-      .use(router)
-      .use(createPinia())
-      .use(i18n)
-      .mount('#app')
-
-    const store = useStore()
-    store.wsConnection = true
-  },
-)
-ws.setup.setHandler(
-  'onclose',
-  (event) => {
-    console.log('closed', event)
-    const store = useStore()
-    store.wsConnection = false
-    store.clearRough()
-    store.clearDetails()
-  },
-)
-
-ws.setup.setHandler(
-  'onmessage',
-  (event) => {
-    if (event.data) {
-      const data = JSON.parse(event.data)
-
-      if (data.id !== null)
-        ws.callbacksCollection.run(data.id, event, data)
-
-      if (data?.method === 'ssh.notification') {
-        const eventName = data?.params?.[0]?.event
-        switch (eventName) {
-          case 'rough':
-            wsHandler.handleRough(data)
-            break
-          case 'temp':
-            wsHandler.handleTemp(data)
-            break
-          case 'cpuInfo':
-            wsHandler.handleCPUInfo(data)
-            break
-          case 'cpuPerformance':
-            wsHandler.handleCPUPerformance(data)
-            break
-          case 'uptime':
-            wsHandler.handleUptime(data)
-            break
-          case 'loadavg':
-            wsHandler.handleLoadavg(data)
-            break
-          case 'memoryPerformance':
-            wsHandler.handleMemoryPerformance(data)
-            break
-          case 'netStat':
-            wsHandler.handleNetStat(data)
-            break
-          case 'netDev':
-            wsHandler.handleNetDev(data)
-            break
-          case 'disk':
-            wsHandler.handleDisk(data)
-            break
-          case 'process':
-            wsHandler.handleProcess(data)
-            break
-          default:
-            console.error(eventName)
-        }
-      }
-    }
-  },
-)
+ws.setup.setupBasic()

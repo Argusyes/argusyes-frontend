@@ -19,7 +19,7 @@ const description = `Please check your path again: ${route.fullPath}`
         >
           <n-button
             circle
-            quaternary
+            tertiary
             strong
             class="text-xl"
             @click="$router.back()"
@@ -29,7 +29,7 @@ const description = `Please check your path again: ${route.fullPath}`
           /
           <n-button
             circle
-            quaternary
+            tertiary
             strong
             class="text-xl"
             @click="$router.push('/status')"

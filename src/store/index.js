@@ -18,7 +18,7 @@ export const useStore = defineStore('main', () => {
     username: '',
   })
 
-  const wsConnection = ref(undefined)
+  const wsConnection = ref(true)
 
   const rough = ref({})
   const cpu = ref({})

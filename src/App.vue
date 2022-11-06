@@ -27,6 +27,15 @@ const reload = () => {
 }
 provide('reload', reload)
 
+// redirect to connection lost page
+watch(
+  () => store.wsConnection,
+  (newVal) => {
+    if (!newVal)
+      router.push('/connection-lost')
+  },
+)
+
 // logout
 watchEffect(() => {
   if (!store.jwt && route.path !== '/login')
