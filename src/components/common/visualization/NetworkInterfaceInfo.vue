@@ -37,7 +37,9 @@ const showGreenWifiLogo = computed(() => {
             {{ props.data.name }}
           </span>
         </div>
-        <span class="secondary-text">10.112.159.83</span>
+        <span class="secondary-text">
+          {{ props.data.ip[0] }}
+        </span>
       </div>
       <div class="flex justify-between items-center">
         <DataWithTitle

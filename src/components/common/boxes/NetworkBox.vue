@@ -58,7 +58,7 @@ const virList = computed(() => {
       <div class="flex justify-between items-center">
         <!-- TODO: can't find RETRANS -->
         <DataWithTitle
-          :num="8"
+          :num="round(net.netTCP?.reTransRate ?? 0, 1)"
           unit="%"
           title="RETRANS"
         />
