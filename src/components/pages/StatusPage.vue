@@ -56,21 +56,6 @@ onMounted(() => {
     )
   })
 })
-onUnmounted(() => {
-  const params = data.value.map((e) => {
-    return {
-      port: e.port,
-      host: e.host,
-      user: e.user,
-    }
-  })
-  const id = ws.api.stopRoughMonitor(
-    params,
-    (event, data) => {
-      console.log('----- cb: stopRoughMonitor -----', event, data)
-    },
-  )
-})
 </script>
 
 <template>

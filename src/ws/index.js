@@ -201,6 +201,7 @@ export const wsHandler = {
     const id = `${user}@${host}:${port}`
     store.rough[id] = { cpu, disk, loadavg, memory, net, temp }
     // store.rough = message
+    console.log('@@@', data)
   },
   handleTemp(data) {
     const store = useStore()
