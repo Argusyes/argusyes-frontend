@@ -1,6 +1,7 @@
 <script setup>
 const router = useRouter()
 const description = 'Websocket connection is lost, please try to reconnect later'
+let intervalId
 
 function handleReconnect() {
   ws.createSocket()
@@ -12,6 +13,17 @@ function handleReconnect() {
     },
   )
 }
+
+onMounted(() => {
+  intervalId = setInterval(() => {
+    console.log('reconnect...')
+    handleReconnect()
+  }, 3000)
+})
+
+onUnmounted(() => {
+  clearInterval(intervalId)
+})
 </script>
 
 <template>
