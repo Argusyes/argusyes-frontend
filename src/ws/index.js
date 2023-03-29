@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-use-before-define */
 import _ from 'lodash'
 import { useStore } from '@/store'
 
@@ -76,43 +77,7 @@ export const ws = {
 
             if (data?.method === 'ssh.notification') {
               const eventName = data?.params?.[0]?.event
-              switch (eventName) {
-                case 'rough':
-                  wsHandler.handleRough(data)
-                  break
-                case 'temp':
-                  wsHandler.handleTemp(data)
-                  break
-                case 'cpuInfo':
-                  wsHandler.handleCPUInfo(data)
-                  break
-                case 'cpuPerformance':
-                  wsHandler.handleCPUPerformance(data)
-                  break
-                case 'uptime':
-                  wsHandler.handleUptime(data)
-                  break
-                case 'loadavg':
-                  wsHandler.handleLoadavg(data)
-                  break
-                case 'memoryPerformance':
-                  wsHandler.handleMemoryPerformance(data)
-                  break
-                case 'netStat':
-                  wsHandler.handleNetStat(data)
-                  break
-                case 'netDev':
-                  wsHandler.handleNetDev(data)
-                  break
-                case 'disk':
-                  wsHandler.handleDisk(data)
-                  break
-                case 'process':
-                  wsHandler.handleProcess(data)
-                  break
-                default:
-                  console.error(eventName)
-              }
+              wsHandler[eventName](data)
             }
           }
         },
@@ -181,7 +146,7 @@ export const ws = {
 }
 
 export const wsHandler = {
-  handleRough(data) {
+  rough: function handleRough(data) {
     const {
       params: [{ message }],
     } = data
@@ -203,7 +168,7 @@ export const wsHandler = {
     // store.rough = message
     console.log('@@@', data)
   },
-  handleTemp(data) {
+  temp: function handleTemp(data) {
     const store = useStore()
     const {
       params: [{
@@ -215,7 +180,7 @@ export const wsHandler = {
     } = data
     // console.log('--- temp ---', tempMap, hostInfo)
   },
-  handleCPUInfo(data) {
+  cpuInfo: function handleCPUInfo(data) {
     const store = useStore()
     const {
       params: [{
@@ -228,7 +193,7 @@ export const wsHandler = {
     // console.log('--- cpu info ---', cpuInfo, hostInfo)
     store.cpu.cpuInfo = cpuInfo
   },
-  handleCPUPerformance(data) {
+  cpuPerformance: function handleCPUPerformance(data) {
     const store = useStore()
     const {
       params: [{
@@ -243,7 +208,7 @@ export const wsHandler = {
     store.cpu.cpuPerformance = cpuPerformance
     store.cpu.total = total
   },
-  handleUptime(data) {
+  uptime: function handleUptime(data) {
     const store = useStore()
     const {
       params: [{
@@ -255,7 +220,7 @@ export const wsHandler = {
     } = data
     // console.log('--- uptime ---', uptime, hostInfo)
   },
-  handleLoadavg(data) {
+  loadavg: function handleLoadavg(data) {
     const store = useStore()
     const {
       params: [{
@@ -268,7 +233,7 @@ export const wsHandler = {
     // console.log('--- loadavg ---', loadavg, hostInfo)
     store.cpu.loadavg = loadavg
   },
-  handleMemoryPerformance(data) {
+  memoryPerformance: function handleMemoryPerformance(data) {
     const store = useStore()
     const {
       params: [{
@@ -281,7 +246,7 @@ export const wsHandler = {
     // console.log('--- memory performance ---', memory, hostInfo)
     store.mem.memory = memory
   },
-  handleNetStat(data) {
+  netStat: function handleNetStat(data) {
     const store = useStore()
     const {
       params: [{
@@ -296,7 +261,7 @@ export const wsHandler = {
     store.net.netTCP = netTCP
     store.net.netUDP = netUDP
   },
-  handleNetDev(data) {
+  netDev: function handleNetDev(data) {
     const store = useStore()
     const {
       params: [{
@@ -311,7 +276,7 @@ export const wsHandler = {
     store.net.netDevTotal = netDevTotal
     store.net.netDev = netDev
   },
-  handleDisk(data) {
+  disk: function handleDisk(data) {
     const store = useStore()
     const {
       params: [{
@@ -333,7 +298,7 @@ export const wsHandler = {
     // console.log('--- disk ---', diskMap, read, readUnit, readRate, readRateUnit, write, writeUnit, writeRate, writeRateUnit, hostInfo)
     store.disk = message
   },
-  handleProcess(data) {
+  process: function handleProcess(data) {
     const store = useStore()
     const {
       params: [{
